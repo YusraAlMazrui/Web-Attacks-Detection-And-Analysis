@@ -1,0 +1,35 @@
+# Detecting Web Attacks
+
+Completed as part of the Let'sDefend Web Attack Detection and Analysis learning path.
+
+## Topics Covered
+
+- Web attack detection
+- Web application logs
+- HTTP requests and responses
+- Attack indicators
+- Security event analysis
+- Web attack investigation
+
+## Practical Skills
+
+- Analyzing web traffic and logs
+- Identifying suspicious web requests
+- Investigating indicators of compromise
+- Understanding common web attack patterns
+- Documenting investigation findings
+
+## Tools / Technologies
+
+- Let'sDefend SOC environment
+- Web server logs
+- HTTP
+- MITRE ATT&CK
+
+## Key Takeaways
+
+Briefly describe what YOU personally learned from the course.
+
+## Evidence
+
+Screenshots from the lab environment, where sharing is permitted.
