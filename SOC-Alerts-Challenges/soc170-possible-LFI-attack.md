@@ -45,6 +45,8 @@ Playbook step 1: determine whether the source is internal or external.
 
 ![(images/soc170-endpoint-01-endpoint-search.png)](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/6fc0f3b6d8b5a3e133bfabf9f9c810e8050f0497/Images/SOC170-endpoint-search.png)
 
+![(Images/SOC170-106.55.45.162-NOTFOUND.png)
+](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/c04d12ec35929d3872154cbb311b07a812f3b2ae/Images/SOC170-106.55.45.162-NOTFOUND.png)
 
 ## 4. Collect data on the IP (reputation)
 
