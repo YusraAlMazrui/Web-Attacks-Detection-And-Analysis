@@ -114,8 +114,16 @@ https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/cdc92bc
 
 **Tasks**
 - For an attacker IP given in the question, find **on which day of the month** its XSS attempts happened.
+
+![04-Lab2-Q1.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/8c311b3434d65d4d8bceeb79a0c29eb46fddac82/Images/04-Lab2-Q1.png)
+
 - Identify **the name of the attack** a second IP attempted.
+
+![04-Lab2-Q2.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/8c311b3434d65d4d8bceeb79a0c29eb46fddac82/Images/04-Lab2-Q2.png)
+
 - Find the **User-Agent** of a POST request at a specific timestamp.
+
+![04-Lab2-Q3.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/8c311b3434d65d4d8bceeb79a0c29eb46fddac82/Images/04-Lab2-Q3.png)
 
 **How I approached it**
 - Filtered the log by IP: `sudo cat /var/log/apache2/access.log.1 | grep <IP>`
@@ -124,16 +132,6 @@ https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/cdc92bc
   - One IP tried **several attack types in sequence** (SQLi, UNION-based SQLi, then XSS), which looks like manual probing.
   - The second IP's requests were **XSS filter-evasion payloads** (event handlers, `javascript:` URIs, CSS `expression(...)`, unusual escapes), the kind produced by fuzzing lists.
   - A POST request's **body isn't visible** in the access log (see lesson 2), but its **User-Agent** is, and a non-browser User-Agent is a useful hint that a tool, not a person with a browser, sent it.
-
-**Screenshots**
-
-_Add your lab screenshots here: save them in the `images/` folder, then replace the example lines below._
-
-<!--
-![Filtering the log by attacker IP](images/attacks-lab-01-grep-by-ip.png)
-![SQLi and XSS attempts in the log](images/attacks-lab-02-sqli-xss-requests.png)
-![Filtering by timestamp](images/attacks-lab-03-grep-timestamp.png)
--->
 
 ---
 
@@ -257,21 +255,16 @@ grep -RPn "(passthru|shell_exec|system|phpinfo|base64_decode|chmod|mkdir|fopen|f
 
 **Tasks**
 - Find the **filename** of a PHP shell on the server.
+
+![04-Lab3-Q1.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/8c311b3434d65d4d8bceeb79a0c29eb46fddac82/Images/04-Lab3-Q1.png)
+
 - Decide whether a web shell is **hidden inside an image** on the server (Y/N).
+
+![04-Lab3-Q2.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/8c311b3434d65d4d8bceeb79a0c29eb46fddac82/Images/04-Lab3-Q2.png)
 
 **How I approached it**
 - Ran the `grep -Rn "system *(" /var/www` search to find files calling `system()` and reviewed the matching file.
 - For the image question, the course's method is to check images for abnormal EXIF fields and search the code for `exif_read_data` / `preg_replace`.
-
-**Screenshots**
-
-_Add your lab screenshots here: save them in the `images/` folder, then replace the example lines below._
-
-<!--
-![grep search for system()](images/webshell-lab-01-grep-system.png)
-![Web root folder](images/webshell-lab-02-web-root.png)
-![Checking images for hidden code](images/webshell-lab-03-image-check.png)
--->
 
 ---
 
