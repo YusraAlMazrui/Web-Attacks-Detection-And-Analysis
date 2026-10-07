@@ -13,7 +13,7 @@
 | Target | WebServer1006 (172.16.17.13) |
 | Request | `GET https://172.16.17.13/?file=../../../../etc/passwd` |
 | Alert trigger | URL contains `passwd` |
-| Device action | Allowed (not blocked) |
+| Device action | Blocked |
 | **Verdict** | **True positive, attack unsuccessful** |
 
 ---
