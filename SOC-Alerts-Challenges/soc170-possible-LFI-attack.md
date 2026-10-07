@@ -36,6 +36,8 @@ The requested URL passes `../../../../etc/passwd` in a `file` parameter. This is
 
 I opened the alert with the `>>` button and created the case (ticket) to begin the investigation. Playbooks differ per organization; this lab uses the LetsDefend playbook.
 
+![Images/SOC170-Ticket-Created.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/1a136f2342386e8f2e6d241f20e7c2ed95c149c7/Images/SOC170-Ticket-Created.png) 
+
 ## 3. Is the traffic from inside or outside the network?
 
 Playbook step 1: determine whether the source is internal or external.
