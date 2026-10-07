@@ -8,14 +8,14 @@ This section is about **post-attack analysis**: working out what happened on a w
 
 ## Contents
 
-1. [Introduction to Hacked Web Server Analysis](https://app.letsdefend.io/training/lesson_detail/introduction-to-hacked-web-server-analysis)
-2. [Log Analysis on Web Servers](https://app.letsdefend.io/training/lesson_detail/log-analysis-on-web-servers)
-3. [Attacks on Web Servers](https://app.letsdefend.io/training/lesson_detail/attacks-on-web-servers)
-4. [Attacks Against Web Applications](https://app.letsdefend.io/training/lesson_detail/attacks-against-web-applications)
-5. [Vulnerabilities on Servers](https://app.letsdefend.io/training/lesson_detail/vulnerabilities-on-servers)
-6. [Vulnerabilities in Programming Language](https://app.letsdefend.io/training/lesson_detail/vulnerabilities-in-programming-language)
-7. [Discovering the Web Shell](https://app.letsdefend.io/training/lesson_detail/discovering-the-web-shell)
-8. [Hacked Web Server Analysis Example](https://app.letsdefend.io/training/lesson_detail/hacked-web-server-analysis-example)
+1. Introduction to Hacked Web Server Analysis
+2. Log Analysis on Web Servers
+3. Attacks on Web Servers
+4. Attacks Against Web Applications
+5. Vulnerabilities on Servers
+6. Vulnerabilities in Programming Language
+7. Discovering the Web Shell
+8. Hacked Web Server Analysis Example
 
 Hands-on labs in this section: **3** (after lessons 2, 3 and 7).
 
