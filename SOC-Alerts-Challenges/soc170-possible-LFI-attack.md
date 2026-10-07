@@ -62,18 +62,9 @@ I checked the source IP on **VirusTotal**.
 
 ## 5. Examine the traffic
 
-- Opened **Log Management** and switched the view from **Pro** to **Basic** for easier reading.
+- Opened **Log Management**.
 - Used **Show filter**, selected the **source address** field and entered the attacker IP from the alert.
 - Because this is a possible LFI, I read through **all fields of the URL** for LFI indicators. They were easy to spot: `../../../../` traversal plus `/etc/passwd`.
-
-**Screenshots**
-
-_Add your lab screenshots here: save them in the `images/` folder, then replace the example lines below._
-
-<!--
-![Log Management filtered by source address](images/soc170-logs-01-log-filter.png)
-![LFI indicators in the URL](images/soc170-logs-02-lfi-indicators.png)
--->
 
 ## 6. Malicious or not?
 
@@ -102,13 +93,7 @@ A **500 (server error)** with a **response size of 0** means no file contents we
 > - Look for **follow-up activity** from the target, such as new outbound connections or logins.
 > In this lab the filtered logs showed only this single request.
 
-**Screenshots**
-
-_Add your lab screenshots here: save them in the `images/` folder, then replace the example lines below._
-
-<!--
-![Raw log: response size 0, status 500](images/soc170-success-01-raw-log.png)
--->
+![Images/SOC170-Raw-Log.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/7b7168e80b58e466e90b6b6f04752aefef7c0877/Images/SOC170-Raw-Log.png)
 
 ## 9. Remaining playbook steps
 
