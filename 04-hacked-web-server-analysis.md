@@ -17,8 +17,6 @@ This section is about **post-attack analysis**: working out what happened on a w
 7. Discovering the Web Shell
 8. Hacked Web Server Analysis Example
 
-Hands-on labs in this section: **3** (after lessons 2, 3 and 7).
-
 ---
 
 ## 1. Introduction to Hacked Web Server Analysis
