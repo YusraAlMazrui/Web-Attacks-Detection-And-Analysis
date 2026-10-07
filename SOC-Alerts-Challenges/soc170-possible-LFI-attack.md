@@ -101,7 +101,7 @@ A **500 (server error)** with a **response size of 0** means no file contents we
 - **Artifacts:** added the attacker IP (`106.55.45.162`, comment: *Attacker*).
 - **Tier 2 escalation:** the playbook calls for escalation when the attack succeeds or when an internal device is compromised. Since this was an external attack that **did not succeed**, escalation wasn't required. (Always follow your organization's own escalation procedure.)
 - **Analyst note:** wrote a short summary:
-  > An external IP "106.55.45.162" from the TencentCloud network attempted an LFI attack against WebServer1006 (172.16.17.13) on March 01, 2022, at 10:10 AM. After reviewing the logs and investigating the activity, I confirmed it was a true positive, but the attack was unsuccessful.
+  > An external IP "106.55.45.162" from the TencentCloud network attempted an LFI attack against WebServer1006 (172.16.17.13) on March 01, 2022, at 10:10 AM. After reviewing the logs and investigating the activity, I confirmed it was a true positive, and the attack was unsuccessful.
 - **Final result:** **True Positive** and closed the case.
 
 ## What I learned
