@@ -17,10 +17,6 @@ My notes and lab write-ups from the **Web Attack Detection and Analysis** course
 |-------|------|---------|
 | [SOC170 - Passwd Found in Requested URL](SOC-Alerts-Challenges/soc170-possible-LFI-attack.md) | Web Attack (LFI) | True Positive |
 
-## How each file is organized
-
-For every attack: **what it is**, **how it works**, **impact**, **prevention**, **detection indicators**, and the **lab** I completed (environment, what I had to find, and the skills used).
-
 ## Approach used across the labs
 
 Each lab gave a log file to investigate. The recurring questions were:
