@@ -7,7 +7,7 @@
 This section covers the fundamentals of web attacks from a **defender's / SOC analyst's** point of view: how each attack works, what it looks like in logs and HTTP requests, how to tell whether it succeeded, and how to prevent it.
 
 | # | Topic | 
-|---|-------|----------|
+|---|-------|
 | 1 | SQL Injection (SQLi) | 
 | 2 | Cross-Site Scripting (XSS) |
 | 3 | Command Injection | 
