@@ -4,11 +4,11 @@ My notes and lab write-ups from the **Web Attack Detection and Analysis** course
 
 ## Contents
 
-| Section | Topics | Labs |
-|---------|--------|------|
-| [1. Detecting Web Attacks](01-detecting-web-attacks/README.md) | SQL Injection, XSS, Command Injection, IDOR, LFI & RFI | 5 + [SOC lab](01-detecting-web-attacks/soc170-possible-lfi-attack.md) |
-| [2. Detecting Web Attacks - 2](02-detecting-web-attacks-2/README.md) | Open Redirection, Directory Traversal, Brute Force, XXE | 4 |
-| [3. Detecting Advanced Web Attacks](03-detecting-advanced-web-attacks/README.md) | SSTI, Expression Language Injection, HTTP Header Injection, SSRF, NoSQL Injection | 5 |
+| Section | Topics |
+|---------|--------|
+| [1. Detecting Web Attacks](01-detecting-web-attacks/README.md) | SQL Injection, XSS, Command Injection, IDOR, LFI & RFI | 
+| [2. Detecting Web Attacks - 2](02-detecting-web-attacks-2/README.md) | Open Redirection, Directory Traversal, Brute Force, XXE | 
+| [3. Detecting Advanced Web Attacks](03-detecting-advanced-web-attacks/README.md) | SSTI, Expression Language Injection, HTTP Header Injection, SSRF, NoSQL Injection | 
 
 ## How each file is organized
 
