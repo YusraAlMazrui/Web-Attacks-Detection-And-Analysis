@@ -127,11 +127,10 @@ https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/cdc92bc
 
 **How I approached it**
 - Filtered the log by IP: `sudo cat /var/log/apache2/access.log.1 | grep <IP>`
-- Filtered by exact timestamp: `... | grep 27/Sep/2022:10:56:39` style filters.
 - Observations:
   - One IP tried **several attack types in sequence** (SQLi, UNION-based SQLi, then XSS), which looks like manual probing.
   - The second IP's requests were **XSS filter-evasion payloads** (event handlers, `javascript:` URIs, CSS `expression(...)`, unusual escapes), the kind produced by fuzzing lists.
-  - A POST request's **body isn't visible** in the access log (see lesson 2), but its **User-Agent** is, and a non-browser User-Agent is a useful hint that a tool, not a person with a browser, sent it.
+  - A POST request's is **User-Agent**, and a non-browser User-Agent is a useful hint that a tool, not a person with a browser, sent it.
 
 ---
 
@@ -263,8 +262,8 @@ grep -RPn "(passthru|shell_exec|system|phpinfo|base64_decode|chmod|mkdir|fopen|f
 ![04-Lab3-Q2.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/8c311b3434d65d4d8bceeb79a0c29eb46fddac82/Images/04-Lab3-Q2.png)
 
 **How I approached it**
-- Ran the `grep -Rn "system *(" /var/www` search to find files calling `system()` and reviewed the matching file.
-- For the image question, the course's method is to check images for abnormal EXIF fields and search the code for `exif_read_data` / `preg_replace`.
+- Ran the `grep -Rn "system *(" /var/www` search to find files calling `system()` and reviewed the matching file which is **run.php**
+- For the image question, the course's method is to check images for abnormal EXIF fields and search the code for `exif_read_data` / `preg_replace`. However, since there are no image files, the answer is **N**.
 
 ---
 
