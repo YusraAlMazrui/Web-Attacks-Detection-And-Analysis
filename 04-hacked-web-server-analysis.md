@@ -58,8 +58,16 @@ This section is about **post-attack analysis**: working out what happened on a w
 
 **Tasks**
 - Find the **year** of a request to a specific path on the Nginx server.
+
+![Images/04-Lab1-Q1.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/2b05e0c3975df05e2e0296325896fda658c526f5/Images/04-Lab1-Q1.png)
+
 - Find the **IP address** that tried to read `/etc/passwd` on the Nginx server.
+
+![Images/04-Lab1-Q2.png]
+
 - Find the **IP address** that attempted a **SQL injection** on the Apache2 server.
+
+![Images/04-Lab1-Q3.png]
 
 **How I approached it**
 - Opened the nginx log in a text editor and searched for the requested path and the `/etc/passwd` string.
@@ -68,16 +76,6 @@ This section is about **post-attack analysis**: working out what happened on a w
   - The nginx entries for the suspicious requests returned **502** responses, so those requests did not return file contents.
   - The Apache SQLi request returned **200** with the same response size as the normal homepage request, a hint that the page output did not change (a hint, not proof).
   - Rotated logs ending in `.gz` are compressed. They can be read with `zcat` / `zgrep` instead of `cat` / `grep`.
-
-**Screenshots**
-
-_Add your lab screenshots here: save them in the `images/` folder, then replace the example lines below._
-
-<!--
-![Log folder listing](images/log-analysis-lab-01-log-folder.png)
-![Searching the nginx log](images/log-analysis-lab-02-nginx-search.png)
-![Filtering the Apache2 log with grep](images/log-analysis-lab-03-apache-grep.png)
--->
 
 ---
 
