@@ -42,7 +42,7 @@ Playbook step 1: determine whether the source is internal or external.
 
 - In **Endpoint Security**, I checked the list of internal hosts (you can also search by IP in the search bar).
 
-  ![(images/soc170-endpoint-01-endpoint-search.png)](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/6fc0f3b6d8b5a3e133bfabf9f9c810e8050f0497/Images/SOC170-endpoint-search.png)
+  ![images/soc170-endpoint-01-endpoint-search.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/6fc0f3b6d8b5a3e133bfabf9f9c810e8050f0497/Images/SOC170-endpoint-search.png)
   
 - The source IP returned **no matches**, so it isn't part of the internal network. It comes from an **external source (the Internet)**.
 
@@ -56,7 +56,7 @@ I checked the source IP on **VirusTotal**.
 - **VirusTotal:** no security vendor flagged the IP as malicious. It belongs to a Tencent cloud network (country: CN).
 - The IP is not currently reported as malicious, **but a clean reputation doesn't mean the request is benign**. Cloud IPs are new or rotating, so I judged the traffic itself.
 
-![(Images/SOC170-VirusTotal-Check.png)]([images/soc170-reputation-01-virustotal.png)](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/cb07ade87c8d4a111fbd1472750bfe4f472ef826/Images/SOC170-VirusTotal-Check.png)
+![Images/SOC170-VirusTotal-Check.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/cb07ade87c8d4a111fbd1472750bfe4f472ef826/Images/SOC170-VirusTotal-Check.png)
 
 ## 5. Examine the traffic
 
