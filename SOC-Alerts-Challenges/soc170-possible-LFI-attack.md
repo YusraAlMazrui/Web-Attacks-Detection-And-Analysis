@@ -29,8 +29,6 @@ Before investigating, I read the alert details, since a lot can already be learn
 
 The requested URL passes `../../../../etc/passwd` in a `file` parameter. This is the classic LFI pattern covered in [Section 1](README.md#5-local--remote-file-inclusion-lfi--rfi): `../` sequences to climb out of the web directory, then a sensitive system file.
 
-**Screenshots**
-
 ![images/SOC170-Case-Details.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/67e2eda88382f28c65b2688963492b6de883e6b8/Images/SOC170-Case-Details.png)
 
 
@@ -45,13 +43,8 @@ Playbook step 1: determine whether the source is internal or external.
 - In **Endpoint Security**, I checked the list of internal hosts (you can also search by IP in the search bar).
 - The source IP returned **no matches**, so it isn't part of the internal network. It comes from an **external source (the Internet)**.
 
-**Screenshots**
+![(images/soc170-endpoint-01-endpoint-search.png)](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/6fc0f3b6d8b5a3e133bfabf9f9c810e8050f0497/Images/SOC170-endpoint-search.png)
 
-_Add your lab screenshots here: save them in the `images/` folder, then replace the example lines below._
-
-<!--
-![Endpoint Security search for the source IP (no matches)](images/soc170-endpoint-01-endpoint-search.png)
--->
 
 ## 4. Collect data on the IP (reputation)
 
