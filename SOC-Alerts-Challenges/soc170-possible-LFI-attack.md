@@ -41,9 +41,10 @@ I opened the alert with the `>>` button and created the case (ticket) to begin t
 Playbook step 1: determine whether the source is internal or external.
 
 - In **Endpoint Security**, I checked the list of internal hosts (you can also search by IP in the search bar).
-- The source IP returned **no matches**, so it isn't part of the internal network. It comes from an **external source (the Internet)**.
 
-![(images/soc170-endpoint-01-endpoint-search.png)](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/6fc0f3b6d8b5a3e133bfabf9f9c810e8050f0497/Images/SOC170-endpoint-search.png)
+  ![(images/soc170-endpoint-01-endpoint-search.png)](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/6fc0f3b6d8b5a3e133bfabf9f9c810e8050f0497/Images/SOC170-endpoint-search.png)
+  
+- The source IP returned **no matches**, so it isn't part of the internal network. It comes from an **external source (the Internet)**.
 
 ![(Images/SOC170-106.55.45.162-NOTFOUND.png)
 ](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/c04d12ec35929d3872154cbb311b07a812f3b2ae/Images/SOC170-106.55.45.162-NOTFOUND.png)
