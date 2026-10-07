@@ -13,9 +13,9 @@ My notes and lab write-ups from the **Web Attack Detection and Analysis** course
 
 ## SOC Alerts
 
-| Alert | Type | | Verdict | Write-up |
-|-------|------|----------|---------|----------|
-| [SOC170 - Passwd Found in Requested URL](soc170-possible-LFI-attack.md) | Web Attack (LFI) | True Positive | [Write-up](SOC-Alerts-Challenges/soc170-possible-LFI-attack.md) |
+| Alert | Type | | Verdict |
+|-------|------|----------|
+| [SOC170 - Passwd Found in Requested URL](SOC-Alerts-Challenges/soc170-possible-LFI-attack.md) | Web Attack (LFI) | True Positive |
 
 ## How each file is organized
 
