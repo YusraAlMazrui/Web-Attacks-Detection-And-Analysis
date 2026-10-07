@@ -6,13 +6,13 @@
 
 This section moves to more advanced, injection-style attacks that target template engines, expression interpreters, HTTP headers, server-side requests and NoSQL databases.
 
-| # | Topic | Lab done |
-|---|-------|----------|
-| 1 | Server-Side Template Injection (SSTI) | Yes |
-| 2 | Expression Language Injection (ELI) | Yes |
-| 3 | HTTP Header Injection | Yes |
-| 4 | Server-Side Request Forgery (SSRF) | Yes |
-| 5 | NoSQL Injection | Yes |
+| # | Topic |
+|---|-------|
+| 1 | Server-Side Template Injection (SSTI) | 
+| 2 | Expression Language Injection (ELI) | 
+| 3 | HTTP Header Injection | 
+| 4 | Server-Side Request Forgery (SSRF) | 
+| 5 | NoSQL Injection |
 
 The labs use one log file per attack: `SSTI.log`, `ELI.log`, `HTTP.log`, `SSRF.log`, `NoSQL.log`.
 
