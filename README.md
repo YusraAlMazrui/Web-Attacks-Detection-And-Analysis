@@ -9,6 +9,7 @@ My notes and lab write-ups from the **Web Attack Detection and Analysis** course
 | [1. Detecting Web Attacks](01-detecting-web-attacks/README.md) | SQL Injection, XSS, Command Injection, IDOR, LFI & RFI | 
 | [2. Detecting Web Attacks - 2](02-detecting-web-attacks-2/README.md) | Open Redirection, Directory Traversal, Brute Force, XXE | 
 | [3. Detecting Advanced Web Attacks](03-detecting-advanced-web-attacks/README.md) | SSTI, Expression Language Injection, HTTP Header Injection, SSRF, NoSQL Injection | 
+| [4. Hacked Web Server Analysis](04-hacked-web-server-analysis/README.md) | Log analysis, Web Server and Application Attacks, Web Shells, WordPress Compromise |
 
 ## How each file is organized
 
