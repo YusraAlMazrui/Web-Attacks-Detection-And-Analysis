@@ -56,6 +56,8 @@ This section is about **post-attack analysis**: working out what happened on a w
 
 **Environment:** a Linux VM with logs in `/var/log/nginx/` (`access.log`, `access.log.1`, `access.log.2.gz`, `error.log`, ...) and `/var/log/apache2/access.log.1`.
 
+![Images/04-Lab1-log-root.png)](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/68f885d190ed5e68d5616114a52131f086a1ee6c/Images/04-Lab1-log-root.png)
+
 **Tasks**
 - Find the **year** of a request to a specific path on the Nginx server.
 
