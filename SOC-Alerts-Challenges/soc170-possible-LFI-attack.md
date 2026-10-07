@@ -64,7 +64,6 @@ I checked the source IP on **VirusTotal**.
 
 - Opened **Log Management**.
 - Used **Show filter**, selected the **source address** field and entered the attacker IP from the alert.
-- Because this is a possible LFI, I read through **all fields of the URL** for LFI indicators. They were easy to spot: `../../../../` traversal plus `/etc/passwd`.
 
 ![Images/SOC170-Log-Filter.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/21f2fa12c8efbcc54c9f49e0beb7438ab33cede1/Images/SOC170-Log-Filter.png)
 
@@ -79,6 +78,8 @@ I checked the source IP on **VirusTotal**.
 ## 8. Was the attack successful?
 
 I reviewed the **firewall raw log** for the request:
+
+- Because this is an LFI attack, I read through **all fields of the URL** for LFI indicators: `../../../../` traversal plus `/etc/passwd`.
 
 | Field | Value |
 |---|---|
