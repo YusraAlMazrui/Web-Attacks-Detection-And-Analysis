@@ -51,20 +51,12 @@ Playbook step 1: determine whether the source is internal or external.
 
 ## 4. Collect data on the IP (reputation)
 
-I checked the source IP on **VirusTotal**, **AbuseIPDB** and **Cisco Talos**.
+I checked the source IP on **VirusTotal**.
 
 - **VirusTotal:** no security vendor flagged the IP as malicious. It belongs to a Tencent cloud network (country: CN).
 - The IP is not currently reported as malicious, **but a clean reputation doesn't mean the request is benign**. Cloud IPs are new or rotating, so I judged the traffic itself.
 
-**Screenshots**
-
-_Add your lab screenshots here: save them in the `images/` folder, then replace the example lines below._
-
-<!--
-![VirusTotal result](images/soc170-reputation-01-virustotal.png)
-![AbuseIPDB result](images/soc170-reputation-02-abuseipdb.png)
-![Cisco Talos result](images/soc170-reputation-03-talos.png)
--->
+![(Images/SOC170-VirusTotal-Check.png)]([images/soc170-reputation-01-virustotal.png)](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/cb07ade87c8d4a111fbd1472750bfe4f472ef826/Images/SOC170-VirusTotal-Check.png)
 
 ## 5. Examine the traffic
 
