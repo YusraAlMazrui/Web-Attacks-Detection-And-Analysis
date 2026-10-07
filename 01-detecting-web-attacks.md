@@ -6,13 +6,13 @@
 
 This section covers the fundamentals of web attacks from a **defender's / SOC analyst's** point of view: how each attack works, what it looks like in logs and HTTP requests, how to tell whether it succeeded, and how to prevent it.
 
-| # | Topic | Lab done |
+| # | Topic | 
 |---|-------|----------|
-| 1 | SQL Injection (SQLi) | Yes |
-| 2 | Cross-Site Scripting (XSS) | Yes |
-| 3 | Command Injection | Yes |
-| 4 | IDOR | Yes |
-| 5 | LFI & RFI | Yes |
+| 1 | SQL Injection (SQLi) | 
+| 2 | Cross-Site Scripting (XSS) |
+| 3 | Command Injection | 
+| 4 | IDOR | 
+| 5 | LFI & RFI | 
 
 ---
 
