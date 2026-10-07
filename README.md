@@ -24,8 +24,6 @@ Each lab gave a log file to investigate. The recurring questions were:
 4. Was it automated, and what type of attack was it?
 5. Was it successful?
 
-The main evidence: **User-Agent**, **request frequency**, **payload content** (decoded), and **response size / status code**.
-
 ## Skills
 
 Log analysis, attack classification, attacker attribution, timeline reconstruction, payload decoding, regex-based detection, success/failure assessment.
