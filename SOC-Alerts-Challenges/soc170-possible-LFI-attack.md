@@ -66,6 +66,8 @@ I checked the source IP on **VirusTotal**.
 - Used **Show filter**, selected the **source address** field and entered the attacker IP from the alert.
 - Because this is a possible LFI, I read through **all fields of the URL** for LFI indicators. They were easy to spot: `../../../../` traversal plus `/etc/passwd`.
 
+![Images/SOC170-Log-Filter.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/21f2fa12c8efbcc54c9f49e0beb7438ab33cede1/Images/SOC170-Log-Filter.png)
+
 ## 6. Malicious or not?
 
 **Malicious.** No normal user would request a URL like this: a `file` parameter filled with repeated `../` and a system password file.
@@ -87,33 +89,19 @@ I reviewed the **firewall raw log** for the request:
 
 A **500 (server error)** with a **response size of 0** means no file contents were returned to the attacker, so the attempt **failed**.
 
-> **Note on confidence:** the firewall *permitted* the request, so the block didn't come from the network layer. The evidence for failure is the server's response. Response size and status are strong indicators when response bodies aren't logged, but they are indicators rather than proof. Extra checks that would strengthen the conclusion:
-> - Look for **other requests from the same source IP** (retries with different payloads/encodings, or a later `200` with a non-zero response size).
-> - Check the **web server's own logs** for errors or file-access events around the same time.
-> - Look for **follow-up activity** from the target, such as new outbound connections or logins.
-> In this lab the filtered logs showed only this single request.
+> **Note on confidence:** the firewall *permitted* the request, so the block didn't come from the network layer. The evidence for failure is the server's response. Response size and status are strong indicators when response bodies aren't logged, but they are indicators rather than proof.
 
 ![Images/SOC170-Raw-Log.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/7b7168e80b58e466e90b6b6f04752aefef7c0877/Images/SOC170-Raw-Log.png)
 
 ## 9. Remaining playbook steps
 
-- **Planned test?** Penetration tests and attack-simulation tools (e.g. Verodin, AttackIQ, Picus) can trigger false positives. I checked for any sign that this was a planned test. Here the source is an external IP, not a simulation host.
+- **Planned test?** No, Penetration tests and attack-simulation tools (e.g. Verodin, AttackIQ, Picus) can trigger false positives. Here the source is an external IP, not a simulation host.
 - **Direction of traffic:** Internet to Company Network.
 - **Artifacts:** added the attacker IP (`106.55.45.162`, comment: *Attacker*).
 - **Tier 2 escalation:** the playbook calls for escalation when the attack succeeds or when an internal device is compromised. Since this was an external attack that **did not succeed**, escalation wasn't required. (Always follow your organization's own escalation procedure.)
 - **Analyst note:** wrote a short summary:
   > An external IP "106.55.45.162" from the TencentCloud network attempted an LFI attack against WebServer1006 (172.16.17.13) on March 01, 2022, at 10:10 AM. After reviewing the logs and investigating the activity, I confirmed it was a true positive, but the attack was unsuccessful.
 - **Final result:** **True Positive** and closed the case.
-
-**Screenshots**
-
-_Add your lab screenshots here: save them in the `images/` folder, then replace the example lines below._
-
-<!--
-![Artifacts added](images/soc170-closing-01-artifacts.png)
-![Analyst note](images/soc170-closing-02-analyst-note.png)
-![Review and submit (True Positive)](images/soc170-closing-03-final-verdict.png)
--->
 
 ## What I learned
 
@@ -126,7 +114,7 @@ _Add your lab screenshots here: save them in the `images/` folder, then replace 
 
 ## Skills practised
 
-Alert triage, IP reputation checks (VirusTotal, AbuseIPDB, Cisco Talos), log filtering in a SIEM, LFI indicator recognition, success/failure assessment from response status and size, case documentation, escalation decisions.
+Alert triage, IP reputation checks (VirusTotal), log filtering in a SIEM, LFI indicator recognition, success/failure assessment from response status and size, case documentation, escalation decisions.
 
 ---
 
