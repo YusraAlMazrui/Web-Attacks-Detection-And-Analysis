@@ -31,11 +31,8 @@ The requested URL passes `../../../../etc/passwd` in a `file` parameter. This is
 
 **Screenshots**
 
-_Add your lab screenshots here: save them in the `images/` folder, then replace the example lines below._
+![Alert details (SOC170, EventID 120)]([images/soc170-alert-01-alert-details.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/67e2eda88382f28c65b2688963492b6de883e6b8/Images/SOC170-Case-Details.png))
 
-<!--
-![Alert details (SOC170, EventID 120)](images/soc170-alert-01-alert-details.png)
--->
 
 ## 2. Start the playbook
 
