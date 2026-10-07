@@ -96,7 +96,7 @@ A **500 (server error)** with a **response size of 0** means no file contents we
 
 ## 9. Remaining playbook steps
 
-- **Planned test?** No, Penetration tests and attack-simulation tools (e.g. Verodin, AttackIQ, Picus) can trigger false positives. Here the source is an external IP, not a simulation host.
+- **Planned test?** **No**, Penetration tests and attack-simulation tools (e.g. Verodin, AttackIQ, Picus) can trigger false positives. Here the source is an external IP, not a simulation host.
 - **Direction of traffic:** Internet to Company Network.
 - **Artifacts:** added the attacker IP (`106.55.45.162`, comment: *Attacker*).
 - **Tier 2 escalation:** the playbook calls for escalation when the attack succeeds or when an internal device is compromised. Since this was an external attack that **did not succeed**, escalation wasn't required. (Always follow your organization's own escalation procedure.)
