@@ -7,7 +7,7 @@
 | | |
 |---|---|
 | Alert | SOC170 - Passwd Found in Requested URL - Possible LFI Attack |
-| Severity / difficulty | High / Easy |
+| Severity / difficulty | Easy |
 | MITRE ATT&CK | T1190 (Exploit Public-Facing Application) |
 | Source IP | 106.55.45.162 (external) |
 | Target | WebServer1006 (172.16.17.13) |
