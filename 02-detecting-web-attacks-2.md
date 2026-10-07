@@ -6,12 +6,12 @@
 
 This section continues with four more web attacks, again focused on how to **recognize them in access logs**, what impact they have, and how to prevent them.
 
-| # | Topic | Lab done |
-|---|-------|----------|
-| 1 | Open Redirection | Yes |
-| 2 | Directory Traversal | Yes |
-| 3 | Brute Force | Yes |
-| 4 | XML External Entity (XXE) | Yes |
+| # | Topic | 
+|---|-------|
+| 1 | Open Redirection |
+| 2 | Directory Traversal | 
+| 3 | Brute Force | 
+| 4 | XML External Entity (XXE) | 
 
 The labs in this section use `access.log` files from a web server hosting a blog-style application, organized in separate folders per attack (`Open-Redirection`, `Directory-Traversal`, `Brute-Force`, `XML-External-Entity`).
 
