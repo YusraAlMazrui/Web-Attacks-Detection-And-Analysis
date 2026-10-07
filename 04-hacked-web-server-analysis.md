@@ -65,11 +65,13 @@ This section is about **post-attack analysis**: working out what happened on a w
 
 - Find the **IP address** that tried to read `/etc/passwd` on the Nginx server.
 
-![Images/04-Lab1-Q2.png]
+![Images/04-Lab1-Q2.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/cdc92bc4fcc2d75c8533e518c0b5f85228e824c9/Images/04-Lab1-Q2.png)
 
 - Find the **IP address** that attempted a **SQL injection** on the Apache2 server.
 
-![Images/04-Lab1-Q3.png]
+![Images/04-Lab1-Q3.png](
+https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/cdc92bc4fcc2d75c8533e518c0b5f85228e824c9/Images/04-Lab1-Q3.png 
+)
 
 **How I approached it**
 - Opened the nginx log in a text editor and searched for the requested path and the `/etc/passwd` string.
