@@ -11,6 +11,12 @@ My notes and lab write-ups from the **Web Attack Detection and Analysis** course
 | [3. Detecting Advanced Web Attacks](03-detecting-advanced-web-attacks.md) | SSTI, Expression Language Injection, HTTP Header Injection, SSRF, NoSQL Injection | 
 | [4. Hacked Web Server Analysis](04-hacked-web-server-analysis.md) | Log analysis, Web Server and Application Attacks, Web Shells, WordPress Compromise |
 
+## SOC Alerts
+
+| Alert | Type | | Verdict | Write-up |
+|-------|------|----------|---------|----------|
+| [SOC170 - Passwd Found in Requested URL](soc170-possible-LFI-attack.md) | Web Attack (LFI) | True Positive | [Write-up](SOC-Alerts-Challenges/soc170-possible-LFI-attack.md) |
+
 ## How each file is organized
 
 For every attack: **what it is**, **how it works**, **impact**, **prevention**, **detection indicators**, and the **lab** I completed (environment, what I had to find, and the skills used).
