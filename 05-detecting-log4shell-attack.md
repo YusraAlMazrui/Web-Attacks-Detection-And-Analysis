@@ -157,6 +157,9 @@ For Log4Shell:
 
 **Tasks**
 - Identify the **DNS server (callback domain)** used in the Log4Shell payloads.
+
+![Images/05-Lab-Identify-DNS-Server.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/b025cc21a7765fce6a5cebf54a3aaba0370da9f6/Images/05-Lab-Identify-DNS-Server.png)
+
 - Identify the **environment variable** used in one of the payloads.
 - Identify which **HTTP header** was attacked.
 
