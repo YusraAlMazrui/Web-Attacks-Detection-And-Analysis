@@ -173,5 +173,5 @@ Reading and URL-decoding complex payloads, identifying probe payloads, attacker 
 
 ---
 
-*Previous: [Section 2](02-detecting-web-attacks-2.md) | Next: [Section 4: Hacked Web Server Analysis](04-hacked-web-server-analysis.md)*
+*Previous: [Section 2: Detecting Web Attacks -2](02-detecting-web-attacks-2.md) | Next: [Section 4: Hacked Web Server Analysis](04-hacked-web-server-analysis.md)*
 
