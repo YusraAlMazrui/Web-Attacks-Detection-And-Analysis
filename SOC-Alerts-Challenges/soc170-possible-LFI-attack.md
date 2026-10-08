@@ -1,4 +1,4 @@
-# SOC Lab: SOC170 - Passwd Found in Requested URL - Possible LFI Attack
+# 120 - SOC Lab: SOC170 - Passwd Found in Requested URL - Possible LFI Attack
 
 > Sub-file of [Section 1: Detecting Web Attacks](README.md). Platform: **LetsDefend** (practice alert, SOC analyst role).
 
