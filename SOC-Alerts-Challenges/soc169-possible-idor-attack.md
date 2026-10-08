@@ -115,9 +115,7 @@ I checked whether this could be an authorized test, including the **Email Securi
 
 **True Positive.**
 
-<!--
-![Analyst note and verdict](../Images/SOC169-Analyst-Note.png)
--->
+![Images/SOC169-Artifacts.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/505bf94e27ef5801a3b29d68e3fc36010a30a07b/Images/SOC169-Artifacts.png) 
 
 ---
 
