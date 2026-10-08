@@ -156,10 +156,6 @@ The pattern `<!ENTITY\s+%[^>]+>` matches the `<!ENTITY % xxe SYSTEM ...>` declar
 
 - **SAML SSRF (illustrative)** — a scenario where a crafted SAML message makes the SP request **internal servers**, bypassing network controls. Lesson: input validation and whitelist-based egress control.
 
-> **On the "Facebook 2015 signature-wrapping" case:** I couldn't independently verify that specific incident, so treat it with caution. The **well-documented** XSW / signature-bypass examples to cite instead are the 2012 academic research *"On Breaking SAML: Be Whoever You Want to Be"* (broke most major SAML frameworks) and the **2017 library flaws CVE-2017-11427 / CVE-2017-11428** (Duo Security), which let attackers tamper with SAML data **without invalidating the signature** — and which affected OneLogin's own python-saml and ruby-saml libraries, tying directly back to the breach above.
-
-> **Related technique worth knowing (beyond the course): Golden SAML.** If an attacker steals the **IdP's signing key/certificate**, they can forge **valid assertions for any user** at will — signatures check out because they're genuinely signed. This was central to the **SolarWinds / Nobelium** intrusions. Detection shifts to protecting and monitoring the IdP signing key and watching for assertions that don't correspond to a real IdP login event.
-
 ---
 
 ## Key takeaways
