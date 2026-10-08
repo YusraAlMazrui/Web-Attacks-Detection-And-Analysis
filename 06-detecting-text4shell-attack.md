@@ -27,8 +27,6 @@ This section covers **Text4Shell (CVE-2022-42889)**, a critical vulnerability in
 
 **Impact of successful exploitation:** remote code execution, command execution with the application's privileges, data theft, and follow-on attacks (reverse shells, lateral movement).
 
-> **Not as easy to hit as Log4Shell.** Both are named "4Shell," but Log4j logged untrusted input almost everywhere, so payloads landed naturally. Text4Shell only fires when an app feeds attacker input **directly into `StringSubstitutor`** with the default interpolators — far less common. Treat a match as serious, but most apps that merely bundle Commons Text aren't exploitable through it.
-
 ---
 
 ## 2. How the attack works
