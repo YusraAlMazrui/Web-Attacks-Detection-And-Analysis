@@ -64,7 +64,7 @@ In **Log Management** I filtered by the **source IP**. The query returned **5 ev
 Looking at the requests:
 
 - The attacker sent **multiple requests with different `user_id` values** to the same page.
-- Many requests came from one IP in a short time, the same pattern described in my [IDOR notes](../01-detecting-web-attacks/README.md#4-insecure-direct-object-reference-idor): the attacker changes an identifier to reach other users' data.
+- Many requests came from one IP in a short time, the same pattern described in my [IDOR notes](../01-detecting-web-attacks.md#4-insecure-direct-object-reference-idor): the attacker changes an identifier to reach other users' data.
 - **No other traffic** from this IP was seen in the network.
 
 The raw log of a request shows:
@@ -78,7 +78,7 @@ The raw log of a request shows:
 | HTTP response size | 267 |
 | HTTP response status | 200 |
 
-Note that this raw log **includes the POST parameters**. Plain web server access logs usually don't (see [Section 4](../04-hacked-web-server-analysis/README.md)), so this is a useful source for judging POST-based attacks.
+Note that this raw log **includes the POST parameters**. Plain web server access logs usually don't (see [Section 4](../04-hacked-web-server-analysis.md)), so this is a useful source for judging POST-based attacks.
 
 ## 6. Malicious or not?
 
