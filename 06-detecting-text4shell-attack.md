@@ -198,4 +198,4 @@ Recognizing interpolation-based RCE payloads in web logs, decoding URL-encoded s
 
 ---
 
-*Previous: [Section 5: Detecting Log4Shell Attack](05-detecting-log4shell-attack.md) | Back to [README](README.md)*
+*Previous: [Section 5: Detecting Log4Shell Attack](05-detecting-log4shell-attack.md) | Next: [Section 7: F5 BIG-IP iControl REST RCE Detection](07-detecting-f5-icontrol-rest-rce.md)*
