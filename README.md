@@ -16,6 +16,7 @@ My notes and lab write-ups from the **Web Attack Detection and Analysis** course
 | [8. JWT Attacks and Detection](08-jwt-attacks-and-detection.md) | JSON Web Tokens, kid (Key ID) Injection, SQLi / RCE / Directory Traversal, Detection & Mitigation |
 | [9. SAML Vulnerabilities and Detection](09-saml-vulnerabilities-and-detection.md) | SAML / SSO (IdP, SP), XXE, XSLT Injection, Signature Wrapping (XSW), SSRF, Regex Detection |
 | [10. Detecting Insecure Deserialization](10-detecting-insecure-deserialization.md) | Serialization RCE across PHP / Python / Java / .NET / Ruby, Signatures, SOC Detection |
+| [11. Detecting Spring4Shell Attack](11-detecting-spring4shell-attack.md) | Spring4Shell (CVE-2022-22965), classLoader Data-Binding RCE, Tomcat JSP Web Shell, Detection & Mitigation |
 
 ## SOC Alerts
 
