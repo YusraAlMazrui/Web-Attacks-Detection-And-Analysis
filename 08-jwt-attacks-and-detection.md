@@ -112,8 +112,6 @@ The same traversal can be aimed at sensitive files to **read** them:
 - **Weak signature algorithms**, outdated/weak crypto makes forgery feasible.
 - **Insufficient input validation** on `kid` or payload fields → the injections above.
 
-> **Related attacks worth knowing (beyond the course text):** the **`alg: none`** attack (token says it's unsigned, and a lax server accepts it with no signature) and the **RS256 → HS256 key-confusion** attack (attacker switches the algorithm and signs with the public key as if it were an HMAC secret). Both are classic JWT forgery techniques a SOC analyst should recognize.
-
 ---
 
 ## 5. Detecting JWT `kid` injection (SOC approach)
