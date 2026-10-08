@@ -4,7 +4,7 @@
 
 ## Overview
 
-This section covers **insecure deserialization** — what happens when an application deserializes attacker-controlled data without validation, which can lead to **remote code execution**, privilege escalation, data tampering and DoS. It covers how it works across PHP, Python, Java, .NET and Ruby, the byte/string **signatures** that give each one away in logs, and how a SOC detects it.
+This section covers **insecure deserialization**. What happens when an application deserializes attacker-controlled data without validation, which can lead to **remote code execution**, privilege escalation, data tampering and DoS. It covers how it works across PHP, Python, Java, .NET and Ruby, the byte/string **signatures** that give each one away in logs, and how a SOC detects it.
 
 | # | Topic |
 |---|-------|
