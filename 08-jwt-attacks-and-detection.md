@@ -55,7 +55,7 @@ The recipient re-computes the signature with the key and compares, if it matches
 
 ## 3. The `kid` (Key ID) parameter
 
-`kid` is an **optional header parameter** that tells the server **which key** to use when verifying the signature — useful when an app rotates keys or holds several. On receiving a token, the server reads `kid` and fetches the matching key (from a database, a file, or a key store).
+`kid` is an **optional header parameter** that tells the server **which key** to use when verifying the signature, useful when an app rotates keys or holds several. On receiving a token, the server reads `kid` and fetches the matching key (from a database, a file, or a key store).
 
 ```json
 {
@@ -65,9 +65,9 @@ The recipient re-computes the signature with the key and compares, if it matches
 }
 ```
 
-**The risk:** `kid` is just a string the client sends, and the server often uses it to **build a database query or a file path**. If that value isn't validated, the attacker controls *which key* the server verifies against — and from there, SQL injection, command injection or path traversal.
+**The risk:** `kid` is just a string the client sends, and the server often uses it to **build a database query or a file path**. If that value isn't validated, the attacker controls *which key* the server verifies against, and from there, SQL injection, command injection or path traversal.
 
-> Note: `kid` belongs in the **header**, not the payload. One example in the course text shows `kid` inside the payload — that's not how it's used; the server reads `kid` from the header when selecting the verification key.
+> Note: `kid` belongs in the **header**, not the payload. One example in the course text shows `kid` inside the payload, that's not how it's used; the server reads `kid` from the header when selecting the verification key.
 
 ---
 
@@ -86,7 +86,7 @@ The query becomes:
 ```sql
 SELECT key FROM keys WHERE key='ABC' UNION SELECT 'XYZ'
 ```
-Now the key comes back as **`XYZ`** — a value the attacker chose — so they can **sign a forged token** with `XYZ` and the server will accept it.
+Now the key comes back as **`XYZ`**, a value the attacker chose, so they can **sign a forged token** with `XYZ` and the server will accept it.
 
 ### `kid` remote code execution (command injection)
 If `kid` is passed into a shell/OS command, the attacker injects a command with a pipe or separator:
@@ -100,7 +100,7 @@ If the key is read from the **filesystem** by `kid`, the attacker points it at a
 ```json
 { "alg": "HS256", "typ": "JWT", "kid": "../../../../../../dev/null" }
 ```
-`/dev/null` is empty, so the verification key becomes an **empty string** — the attacker signs a malicious token with an empty key and **bypasses signature verification entirely**. A static file (e.g. a CSS file) works the same way.
+`/dev/null` is empty, so the verification key becomes an **empty string**, the attacker signs a malicious token with an empty key and **bypasses signature verification entirely**. A static file (e.g. a CSS file) works the same way.
 
 The same traversal can be aimed at sensitive files to **read** them:
 ```json
@@ -108,8 +108,8 @@ The same traversal can be aimed at sensitive files to **read** them:
 ```
 
 ### Other common JWT weaknesses (from the course)
-- **Insecure key management** — a leaked signing secret lets anyone forge tokens.
-- **Weak signature algorithms** — outdated/weak crypto makes forgery feasible.
+- **Insecure key management**, a leaked signing secret lets anyone forge tokens.
+- **Weak signature algorithms**, outdated/weak crypto makes forgery feasible.
 - **Insufficient input validation** on `kid` or payload fields → the injections above.
 
 > **Related attacks worth knowing (beyond the course text):** the **`alg: none`** attack (token says it's unsigned, and a lax server accepts it with no signature) and the **RS256 → HS256 key-confusion** attack (attacker switches the algorithm and signs with the public key as if it were an HMAC secret). Both are classic JWT forgery techniques a SOC analyst should recognize.
@@ -146,10 +146,10 @@ echo 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' | base64 -d 2>/dev/null; echo
 
 ## 6. Mitigation
 
-- **Validate and sanitize the `kid` parameter** — treat it as untrusted input; **allowlist** it to known key identifiers rather than using it to build queries or paths.
+- **Validate and sanitize the `kid` parameter**, treat it as untrusted input; **allowlist** it to known key identifiers rather than using it to build queries or paths.
 - If `kid` selects a key file, **constrain it to a safe directory** and reject traversal sequences.
 - **Never** interpolate `kid` directly into SQL (use parameterized queries) or into shell commands.
-- **Secure key management** — protect signing secrets/private keys; rotate them; never expose them.
+- **Secure key management**, protect signing secrets/private keys; rotate them; never expose them.
 - **Use strong algorithms** and pin the expected `alg` server-side; reject `none` and unexpected algorithm switches.
 - Use **well-maintained JWT libraries**, and enforce **expiration** and a **revocation** path.
 - Regular **code review, security assessments and pen-testing** of the JWT handling.
@@ -158,11 +158,11 @@ echo 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' | base64 -d 2>/dev/null; echo
 
 ## Key takeaways
 
-- A JWT is `header.payload.signature`; its security depends entirely on the server verifying with the **right key** — which is what `kid` attacks subvert.
+- A JWT is `header.payload.signature`; its security depends entirely on the server verifying with the **right key**, which is what `kid` attacks subvert.
 - **`kid` is attacker-controlled input.** If the server uses it to build a DB query or file path without validation, it opens **SQL injection, RCE and directory traversal**.
-- The `/dev/null` (empty-key) traversal trick is especially dangerous — it makes **signature verification pass for a forged token**.
+- The `/dev/null` (empty-key) traversal trick is especially dangerous, it makes **signature verification pass for a forged token**.
 - Detection = **decode the JWT header and inspect `kid`** for SQL, shell or traversal patterns, then correlate with auth/app logs to confirm impact.
-- `kid` is a **header** parameter (the course text places it in the payload in one example — that's incorrect).
+- `kid` is a **header** parameter (the course text places it in the payload in one example, that's incorrect).
 - Fixes are standard injection hygiene: **allowlist/validate `kid`**, parameterized queries, safe path handling, strong key management, and pinning the algorithm.
 
 ## Skills practised
