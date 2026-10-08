@@ -7,13 +7,13 @@
 | | |
 |---|---|
 | Alert | SOC170 - Passwd Found in Requested URL - Possible LFI Attack |
-| Severity / difficulty | Easy |
+| Severity | High |
 | MITRE ATT&CK | T1190 (Exploit Public-Facing Application) |
 | Source IP | 106.55.45.162 (external) |
 | Target | WebServer1006 (172.16.17.13) |
 | Request | `GET https://172.16.17.13/?file=../../../../etc/passwd` |
 | Alert trigger | URL contains `passwd` |
-| Device action | Blocked |
+| Device action | Allowed |
 | **Verdict** | **True positive, attack unsuccessful** |
 
 ---
