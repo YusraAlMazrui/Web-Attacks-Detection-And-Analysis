@@ -1,6 +1,6 @@
 # Section 5: Detecting Log4Shell Attack
 
-> Part of my **Web Attack Detection and Analysis** course notes. See the [README](../README.md) for all sections.
+> Part of my **Web Attack Detection and Analysis** course notes. See the [README](README.md) for all sections.
 
 ## Overview
 
