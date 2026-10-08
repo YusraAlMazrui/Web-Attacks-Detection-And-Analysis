@@ -13,6 +13,7 @@ My notes and lab write-ups from the **Web Attack Detection and Analysis** course
 | [5. Detecting Log4Shell Attack](05-detecting-log4shell-attack.md) | Log4Shell (CVE-2021-44228), Payload Obfuscation, Detection Rules, Mitigation |
 | [6. Detecting Text4Shell Attack](06-detecting-text4shell-attack.md) | Text4Shell, Attack Vectors, How to Exploit, Detection and Mitigation, Soc Analysts | 
 | [7. F5 BIG-IP iControl REST RCE Detection](07-detecting-f5-icontrol-rest-rce.md) | CVE-2022-1388, iControl REST Auth Bypass, /mgmt/tm/util/bash RCE, Detection & Mitigation |
+| [8. JWT Attacks and Detection](08-jwt-attacks-and-detection.md) | JSON Web Tokens, kid (Key ID) Injection, SQLi / RCE / Directory Traversal, Detection & Mitigation |
 
 ## SOC Alerts
 
