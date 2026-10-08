@@ -99,8 +99,6 @@ The labs in this section use `access.log` files from a web server hosting a blog
 
 **Response:** block IPs (e.g. `deny` rules in nginx, **Fail2ban**), lock accounts, add controls.
 
-> **Important nuance from the course:** if a log only contains failed logins, you can't tell whether the attack succeeded. Successful logins typically show a `200` or a redirect, so you need to review the successful-login entries too. Attackers who get in may then use the valid account.
-
 **Lab:** analysed an nginx-style `access.log`.
 - Identified the attacker's **User-Agent**, source IP, and the time of the **successful login** after the brute-force attempts.
 
@@ -121,8 +119,6 @@ The labs in this section use `access.log` files from a web server hosting a blog
 4. Whitelist allowed entities and DTDs.
 5. Access controls to limit damage.
 6. Secure coding practices.
-
-> **Caveat:** the course mentions `libxml_disable_entity_loader()` in PHP. That function is **deprecated since PHP 8.0**, and newer libxml versions don't load external entities by default. Check the parser settings for your version.
 
 **Detection:** search logs and requests for the keywords **`DOCTYPE`, `ELEMENT`, `ENTITY`** (and `SYSTEM`).
 
