@@ -11,6 +11,7 @@ My notes and lab write-ups from the **Web Attack Detection and Analysis** course
 | [3. Detecting Advanced Web Attacks](03-detecting-advanced-web-attacks.md) | SSTI, Expression Language Injection, HTTP Header Injection, SSRF, NoSQL Injection | 
 | [4. Hacked Web Server Analysis](04-hacked-web-server-analysis.md) | Log analysis, Web Server and Application Attacks, Web Shells, WordPress Compromise |
 | [5. Detecting Log4Shell Attack](05-detecting-log4shell-attack.md) | Log4Shell (CVE-2021-44228), Payload Obfuscation, Detection Rules, Mitigation |
+| [6. Detecting Text4Shell Attack](06-detecting-text4shell-attack.md) | Text4Shell, Attack Vectors, How to Exploit, Detection and Mitigation, Soc Analysts | 
 
 ## SOC Alerts
 
