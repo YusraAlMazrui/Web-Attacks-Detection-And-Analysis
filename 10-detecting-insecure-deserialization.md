@@ -178,4 +178,4 @@ Understanding serialization/deserialization and the RCE path through it, recogni
 
 ---
 
-*Previous: [Section 9: SAML Vulnerabilities and Detection](09-saml-vulnerabilities-and-detection.md) | Back to [README](README.md)*
+*Previous: [Section 9: SAML Vulnerabilities and Detection](09-saml-vulnerabilities-and-detection.md) | Next: [Section 11: Detecting Spring4Shell Attack](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/f3a9b40347b54f3bc7a7288a8a1cde7c28153f4f/11-detecting-spring4shell-attack.md)*
