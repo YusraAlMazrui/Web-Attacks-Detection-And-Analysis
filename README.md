@@ -2,6 +2,10 @@
 
 My notes and lab write-ups from the **Web Attack Detection and Analysis** course. The focus is on the defender's side: recognizing web attacks in logs and HTTP requests, judging whether they succeeded, and knowing how to prevent them.
 
+## Certificate
+
+![Web Attack Detection and Analysis Certificate](Images/certificate.png)
+
 ## Contents
 
 | Section | Topics |
