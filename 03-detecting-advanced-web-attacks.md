@@ -34,8 +34,6 @@ The labs use one log file per attack: `SSTI.log`, `ELI.log`, `HTTP.log`, `SSRF.l
 - Use context-specific escaping and sanitize input.
 - Use a secure/sandboxed template engine configuration, and keep everything patched.
 
-> **Caveat:** the course also lists a Content Security Policy (CSP). CSP limits the impact of XSS in the browser, but it does **not** stop server-side template injection.
-
 **Detection:** look for **test payloads** that probe for evaluation, such as `{{7*7}}`, `{{3*3}}`, `${6*6}`, `<%= 3 * 3 %>`, `@(6+5)`, `#{3*3}`. If the response contains the computed value, the template engine is evaluating input.
 
 **Reading the course's example log**
