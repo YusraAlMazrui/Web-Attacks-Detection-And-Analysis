@@ -121,4 +121,4 @@ Alert triage, IP reputation checks (VirusTotal), log filtering in a SIEM, LFI in
 
 ---
 
-*Back to [Section 1](README.md) | [README](../README.md)*
+*Back to [Section 1](../01-detecting-web-attacks.md) | [README](../README.md)*
