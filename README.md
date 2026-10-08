@@ -1,6 +1,6 @@
 # Web Attack Detection and Analysis: Let's Defend Course 
 
-My notes and lab write-ups from the Web Attack Detection and Analysis course. The focus is on the defender's side: recognizing web attacks in logs and HTTP requests, judging whether they succeeded, and knowing how to prevent them — from classic web vulnerabilities through high-profile CVEs (Log4Shell, Text4Shell, Spring4Shell, F5 BIG-IP) and attacks on authentication (JWT, SAML) and serialization.
+My notes and lab write-ups from the Web Attack Detection and Analysis course. The focus is on the defender's side: recognizing web attacks in logs and HTTP requests, judging whether they succeeded, and knowing how to prevent them, from classic web vulnerabilities through high-profile CVEs (Log4Shell, Text4Shell, Spring4Shell, F5 BIG-IP) and attacks on authentication (JWT, SAML) and serialization.
 
 ## Certificate
 
