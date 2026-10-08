@@ -19,13 +19,13 @@ This section covers **CVE-2022-1388**, a critical **authentication bypass → re
 
 ## 1. What is CVE-2022-1388?
 
-- **F5 BIG-IP** is an application delivery controller (ADC) — load balancing, traffic management and security — used widely by enterprises, government and service providers. **iControl REST** is its management API.
+- **F5 BIG-IP** is an application delivery controller (ADC), load balancing, traffic management and security, used widely by enterprises, government and service providers. **iControl REST** is its management API.
 - **CVE-2022-1388** (F5 advisory **May 4, 2022**, ref **K23605346**) is a flaw in iControl REST that lets an **unauthenticated** attacker with network access **bypass authentication** and run commands.
 - **CVSS score: 9.8** (Critical).
 - The core of it: the **`/mgmt/tm/util/bash`** endpoint runs commands as the **root** user of the device, and in the vulnerable path it can be reached **without valid credentials**.
 - Reachable via the **management port** or a **self-IP** that exposes iControl REST.
 
-**Impact of successful exploitation:** full control of the device as root — arbitrary command execution, web shells / backdoors for persistence, and post-exploitation activity. Because BIG-IP sits in front of application traffic, a compromised device is a serious foothold.
+**Impact of successful exploitation:** full control of the device as root, arbitrary command execution, web shells / backdoors for persistence, and post-exploitation activity. Because BIG-IP sits in front of application traffic, a compromised device is a serious foothold.
 
 ---
 
@@ -39,7 +39,7 @@ The exploit abuses how iControl REST handles the **`X-F5-Auth-Token`** header to
 3. The body asks the `bash` utility to **run** an arbitrary Linux command.
 4. The command executes **as root**, and the attacker gets the output back.
 
-It requires **no password** — a valid-looking (but empty) `admin` basic-auth header plus the header trick is enough.
+It requires **no password**, a valid-looking (but empty) `admin` basic-auth header plus the header trick is enough.
 
 ---
 
@@ -49,9 +49,9 @@ For the exploit to work, **all** of these conditions must be met:
 
 1. A **POST** to the endpoint **`/mgmt/tm/util/bash`**.
 2. Header **`X-F5-Auth-Token: 0`**.
-3. **`Authorization: Basic YWRtaW46`** — Base64 for `admin:` (username `admin`, empty password).
+3. **`Authorization: Basic YWRtaW46`**, Base64 for `admin:` (username `admin`, empty password).
 4. **`Connection: X-F5-Auth-Token`** (names the auth-token header as hop-by-hop).
-5. **`Host: localhost`** or **`127.0.0.1`** — or, alternatively, `Connection: X-F5-Auth-Token, X-Forwarded-Host` with any host value.
+5. **`Host: localhost`** or **`127.0.0.1`** or, alternatively, `Connection: X-F5-Auth-Token, X-Forwarded-Host` with any host value.
 6. Body parameter **`"command": "run"`**.
 7. Body parameter **`"utilCmdArgs": "-c '<linux command>'"`** (e.g. `whoami`).
 
@@ -66,7 +66,7 @@ Content-Type: application/json
 
 {"command": "run", "utilCmdArgs": "-c 'whoami'"}
 ```
-Change `whoami` to any command — it runs as root.
+Change `whoami` to any command, it runs as root.
 
 ### Affected BIG-IP versions
 | Branch | Vulnerable range |
@@ -85,17 +85,17 @@ Change `whoami` to any command — it runs as root.
 ### Key idea
 Detection is relatively straightforward because the exploit always targets **one specific path**: `/mgmt/tm/util/bash`. Watch the logs for requests to it.
 
-- The real exploit is a **POST** — a **GET** to the same path is likely a **scan or a false positive**, not working exploitation. Don't alert on GET alone.
+- The real exploit is a **POST**, a **GET** to the same path is likely a **scan or a false positive**, not working exploitation. Don't alert on GET alone.
 - Confirm by checking the other conditions (the `X-F5-Auth-Token` / `Connection` headers, the `command=run` body) where the logs capture them.
 
 ### Regex (from the course)
 ```
 \S+.*POST\s\/mgmt\/tm\/util\/bash\b.*
 ```
-- `\S+` — the client IP (non-whitespace).
-- `.*` — anything before the method.
-- `POST\s\/mgmt\/tm\/util\/bash\b` — a POST to the exact endpoint.
-- `.*` — anything after.
+- `\S+` the client IP (non-whitespace).
+- `.*` anything before the method.
+- `POST\s\/mgmt\/tm\/util\/bash\b` a POST to the exact endpoint.
+- `.*` anything after.
 
 ### grep equivalents
 ```bash
@@ -114,8 +114,8 @@ grep -iE 'POST\s+/mgmt/tm/util/bash' access.log | awk '{print $1}' | sort | uniq
 
 ### Indicators of compromise (on the BIG-IP device)
 Beyond the web/access log, check the device's own audit logs:
-- **`/var/log/audit`** — an entry like `AUDIT - pid=... user=admin folder=/Common module=(tmos)# status=[Command OK] cmd_data=run util bash -c id` shows the bash utility ran a command.
-- **`/var/log/restjavad-audit.0.log`** (and `restjavad-audit.*.log`) — an entry like `{"user":"local/admin","method":"POST","uri":"http://localhost:8100/mgmt/tm/util/bash","status":200,"from":"<ip>"}` shows a POST to the endpoint and the source IP.
+- **`/var/log/audit`** an entry like `AUDIT - pid=... user=admin folder=/Common module=(tmos)# status=[Command OK] cmd_data=run util bash -c id` shows the bash utility ran a command.
+- **`/var/log/restjavad-audit.0.log`** (and `restjavad-audit.*.log`) an entry like `{"user":"local/admin","method":"POST","uri":"http://localhost:8100/mgmt/tm/util/bash","status":200,"from":"<ip>"}` shows a POST to the endpoint and the source IP.
 - Compare these against **legitimate** REST calls, and look for unexpected file/config/process changes.
 - F5 **iHealth heuristics**: H511618 (unknown running processes), H444724 (iControl REST exposed to the internet via the management interface), H458565 (self-IP Port Lockdown set to "Allow All").
 
@@ -165,7 +165,7 @@ The access log shows the **attempt**. To judge success:
 
 **How I approached it**
 - Searched the log for `mgmt/tm/` to surface every request to the endpoint.
-- Counted only the **POST** requests to `/mgmt/tm/util/bash` — those are the real attempts (a GET would be a false positive).
+- Counted only the **POST** requests to `/mgmt/tm/util/bash` those are the real attempts (a GET would be a false positive).
 - Of those, counted how many returned **`200`** (processed / possibly successful) vs an error.
 
 **What I found**
@@ -176,7 +176,7 @@ The access log shows the **attempt**. To judge success:
 - **2** of them returned **`200`**, so those two **may have been successful**; the `400` was rejected.
 
 **Observations**
-- Filtering on the path alone isn't enough — separate **POST from GET**, since only POST can exploit this. The method is what turns a noisy "someone touched the endpoint" into a real attempt.
+- Filtering on the path alone isn't enough, separate **POST from GET**, since only POST can exploit this. The method is what turns a noisy "someone touched the endpoint" into a real attempt.
 - The **status code** is the quick first signal for success (`200` vs `400`), but on a real device you'd confirm with the `restjavad-audit` / `audit` logs, not the access log alone.
 
 ---
@@ -184,7 +184,7 @@ The access log shows the **attempt**. To judge success:
 ## Key takeaways
 
 - CVE-2022-1388 is an **unauthenticated auth-bypass to root RCE** in F5 BIG-IP iControl REST, via a header trick (`Connection: X-F5-Auth-Token`) and the `/mgmt/tm/util/bash` endpoint.
-- Detection centres on **one path** — `/mgmt/tm/util/bash` — but you must separate **POST (real attempt)** from **GET (likely scan/false positive)**.
+- Detection centres on **one path**, `/mgmt/tm/util/bash` but you must separate **POST (real attempt)** from **GET (likely scan/false positive)**.
 - Response **`200`** on a POST to that path is the first sign of possible success; confirm with the device's **audit logs**.
 - The fix is **upgrading BIG-IP**; until then, lock iControl REST down to trusted networks.
 
