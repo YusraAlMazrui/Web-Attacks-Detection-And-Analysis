@@ -29,13 +29,7 @@ The alert details already give the key facts:
 - **How:** HTTP **POST**, and the firewall **allowed** it.
 - The User-Agent is an old browser string (`MSIE 6.0; Windows NT 5.1`), unusual for real users today.
 
-**Screenshots**
-
-_Add your screenshots here: upload them to your `Images/` folder, then uncomment the lines below and check the file names match exactly._
-
-<!--
-![SOC169 alert details](../Images/SOC169-Investigation-Channel.png)
--->
+![Images/SOC169-Investigation-Channel.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/076395bd79442c626f650e16cc29bde3b20dced0/Images/SOC169-Investigation-Channel.png)
 
 ## 2. Create the case and start the playbook
 
