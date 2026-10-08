@@ -161,15 +161,15 @@ For Text4Shell:
 
 - Identify the **attacker's IP address**.
 
-![Images/06-Lab-Attacker-IP.png](Images/06-Lab-Attacker-IP.png)
+![Images/06-Lab-Attacker-IP.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/28d453b343b4833c462e5d7f3f4f431c575876b6/Images/06-Lab-Attacker-IP.png)
 
 - Identify the **DNS server** the attacker tried to reach.
 
-![Images/06-Lab-DNS-Server.png](Images/06-Lab-DNS-Server.png)
+![Images/06-Lab-DNS-Server.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/28d453b343b4833c462e5d7f3f4f431c575876b6/Images/06-Lab-DNS-Server.png)
 
 - Identify the **vulnerable parameter**.
 
-![Images/06-Lab-Vulnerable-Parameter.png](Images/06-Lab-Vulnerable-Parameter.png)
+![Images/06-Lab-Vulnerable-Parameter.pn](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/28d453b343b4833c462e5d7f3f4f431c575876b6/Images/05-Lab-Identify-Environment-Variable.png)
 
 **How I approached it**
 - Opened the log and searched for `script`, `dns` and `${`, which surfaced the payload lines.
