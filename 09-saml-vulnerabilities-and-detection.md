@@ -4,7 +4,7 @@
 
 ## Overview
 
-This section covers **SAML (Security Assertion Markup Language)** — the XML-based standard behind much of enterprise **Single Sign-On (SSO)** — and the attacks that target it: XXE, XSLT injection, response injection, SSRF and the signature-bypass classic, **XML Signature Wrapping (XSW)**. It focuses on how SAML works, where it breaks, how a SOC detects abuse (including regex patterns), and how to secure it.
+This section covers **SAML (Security Assertion Markup Language)**, the XML-based standard behind much of enterprise **Single Sign-On (SSO)**, and the attacks that target it: XXE, XSLT injection, response injection, SSRF and the signature-bypass classic, **XML Signature Wrapping (XSW)**. It focuses on how SAML works, where it breaks, how a SOC detects abuse (including regex patterns), and how to secure it.
 
 | # | Topic |
 |---|-------|
