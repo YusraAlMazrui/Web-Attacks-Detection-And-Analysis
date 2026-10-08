@@ -194,4 +194,5 @@ Recognizing exploit payloads in web logs, decoding obfuscated and URL-encoded st
 
 ---
 
-*Previous: [Section 4: Hacked Web Server Analysis](04-hacked-web-server-analysis.md) | Back to [README](README.md)*
+*Previous: [Section 4: Hacked Web Server Analysis](04-hacked-web-server-analysis.md) | Next: [Section 6: Detecting Text4Shell Attack](06-detecting-text4shell-attack.md)*
+
