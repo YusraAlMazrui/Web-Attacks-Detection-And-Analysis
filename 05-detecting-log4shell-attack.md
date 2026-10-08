@@ -13,13 +13,6 @@ This section covers **Log4Shell (CVE-2021-44228)**, a critical vulnerability in 
 | Detection rules, grep and regex | |
 | Mitigation | |
 
-> ### Corrections to the course material
-> A few parts of the course text are inaccurate or belong to a different vulnerability. I've corrected them in these notes:
-> - **"Check if you're vulnerable" and the Spring/Tomcat patch versions describe Spring4Shell (CVE-2022-22965), not Log4Shell.** The JDK 9+, Tomcat, WAR packaging and `spring-webmvc` conditions, and the Spring 5.3.18 / Tomcat 10.0.20 style fixes, are for that separate vulnerability. Log4Shell depends on the **Log4j version**, so see the corrected version and mitigation sections below.
-> - **Affected versions:** Log4Shell affects Log4j 2.x from **2.0-beta9 through 2.14.1**. Log4j 1.x is not affected by this CVE (it has other issues).
-> - **Serialization vs deserialization:** the course defines deserialization as converting an object into a byte stream. That is **serialization**; deserialization is the reverse.
-> - **Root cause:** the core flaw is the **JNDI lookup feature in log message handling**, which makes Log4j fetch data from an attacker-chosen server. Loading and running the returned class is what turns that into code execution.
-
 ---
 
 ## 1. What is Log4Shell?
