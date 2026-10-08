@@ -20,18 +20,18 @@ This section covers **insecure deserialization**. What happens when an applicati
 ## 1. Serialization and insecure deserialization
 
 - **Serialization** = turning an in-memory object into a storable/transmittable format (a byte stream, or text like JSON/XML).
-- **Deserialization** = the reverse — rebuilding the object from that data.
+- **Deserialization** = the reverse, rebuilding the object from that data.
 
 These are everywhere: saving sessions, caching, passing objects over a network, cross-language data exchange.
 
-**Insecure deserialization** is when an application **blindly deserializes data from an untrusted source** without validation. Because some formats can reconstruct *arbitrary objects* (and run code as part of rebuilding them), a crafted blob can be turned into **code execution** — the attacker never needed valid credentials, just an input that gets deserialized.
+**Insecure deserialization** is when an application **blindly deserializes data from an untrusted source** without validation. Because some formats can reconstruct *arbitrary objects* (and run code as part of rebuilding them), a crafted blob can be turned into **code execution**, the attacker never needed valid credentials, just an input that gets deserialized.
 
 ---
 
 ## 2. How the attack works
 
 ### Code execution (Python `pickle`)
-Python's `pickle` lets a class define `__reduce__`, which tells it how to rebuild the object — and that can be *"call this function with these args."* An attacker abuses it:
+Python's `pickle` lets a class define `__reduce__`, which tells it how to rebuild the objectand that can be *"call this function with these args."* An attacker abuses it:
 ```python
 import pickle, os
 class Malicious:
@@ -57,10 +57,10 @@ If the app trusts the deserialized cookie, the attacker is now **admin**.
 
 ## 3. Prevention and "am I vulnerable?"
 
-**You're at risk if** the app deserializes hostile objects — enabling either **object/RCE attacks** (classes that change behavior on deserialization) or **data-tampering / access-control attacks** (editing serialized state).
+**You're at risk if** the app deserializes hostile objects, enabling either **object/RCE attacks** (classes that change behavior on deserialization) or **data-tampering / access-control attacks** (editing serialized state).
 
 **Prevent it by:**
-- **Don't deserialize untrusted data** — prefer safe formats (JSON/XML) over `pickle`, Java `Serializable`, etc.
+- **Don't deserialize untrusted data**, prefer safe formats (JSON/XML) over `pickle`, Java `Serializable`, etc.
 - **Validate and sanitize** anything you must deserialize.
 - **Whitelist allowed classes** (and blacklist dangerous ones).
 - Use **secure/maintained serialization libraries**, enforce **access controls**, and **patch** dependencies.
@@ -84,7 +84,7 @@ These are the fingerprints that make deserialization payloads detectable in logs
 
 ## 5. Detecting insecure deserialization (SOC approach)
 
-The course lays out the usual SOC workflow — **log monitoring, SIEM rules, anomaly detection** (e.g. unusually large payloads), **input validation**, access controls, security testing, and custom **signatures**. Two concrete techniques:
+The course lays out the usual SOC workflow, **log monitoring, SIEM rules, anomaly detection** (e.g. unusually large payloads), **input validation**, access controls, security testing, and custom **signatures**. Two concrete techniques:
 
 ### Signature / pattern matching
 Grep the access log for the per-language fingerprints above (this is the kind of combined signature used in the lab):
@@ -98,7 +98,7 @@ grep -iE 'O:[0-9]+:|aced0005|AAEAAAD|rO0|BAh|ruby|pickle' access.log | awk '{pri
 ```
 
 ### Exception-based detection (Java)
-Deserializing tampered data often throws tell-tale exceptions — **`ClassNotFoundException`**, **`InvalidClassException`**, **`ClassCastException`**, or errors inside custom `readObject`. Log these (Log4j/SLF4J → ELK/SIEM), alert on thresholds, and **correlate with suspicious HTTP requests**.
+Deserializing tampered data often throws tell-tale exceptions, **`ClassNotFoundException`**, **`InvalidClassException`**, **`ClassCastException`**, or errors inside custom `readObject`. Log these (Log4j/SLF4J → ELK/SIEM), alert on thresholds, and **correlate with suspicious HTTP requests**.
 
 > A WAF/log match proves an **attempt**. Confirm impact with application exceptions, process/endpoint activity and the response behaviour.
 
@@ -159,15 +159,15 @@ Deserializing tampered data often throws tell-tale exceptions — **`ClassNotFou
 - Decoded each payload to attribute it: the **Python pickle** line (`cos\nsystem … echo …`) is the **system-command** attempt (16:13:45); the **`!ruby/object:OpenStruct`** line is the **Ruby** attempt (16:13:48).
 
 **Observations**
-- A `500` on every attempt means the server **errored while deserializing** — that pattern (serialized blob in → server error) is itself a strong detection signal, even without confirming code ran.
-- The attacker **sprayed one payload per language** back-to-back (PHP `O:4:"User"…`, Java `aced0005…`, Python pickle, .NET `AAEAAAD…`, Ruby YAML) — classic automated probing to see which runtime the app uses.
+- A `500` on every attempt means the server **errored while deserializing**, that pattern (serialized blob in → server error) is itself a strong detection signal, even without confirming code ran.
+- The attacker **sprayed one payload per language** back-to-back (PHP `O:4:"User"…`, Java `aced0005…`, Python pickle, .NET `AAEAAAD…`, Ruby YAML) classic automated probing to see which runtime the app uses.
 
 ---
 
 ## Key takeaways
 
 - Insecure deserialization = **deserializing untrusted data** → RCE, privilege escalation, data tampering. Python `pickle`, Java `Serializable`, PHP `unserialize`, .NET `BinaryFormatter` and Ruby YAML are the usual culprits.
-- Each language leaves a **signature** — PHP `O:`/`a:`, Java `AC ED 00 05` / `rO0`, Python streams ending `.`, .NET `AAEAAAD`, Ruby `!ruby/object:` / `BAh` — which is what detection grep/SIEM rules key on.
+- Each language leaves a **signature**, PHP `O:`/`a:`, Java `AC ED 00 05` / `rO0`, Python streams ending `.`, .NET `AAEAAAD`, Ruby `!ruby/object:` / `BAh` which is what detection grep/SIEM rules key on.
 - Detection also leans on **deserialization exceptions** (`ClassNotFoundException`, `InvalidClassException`, `ClassCastException`) and **anomalies** like oversized payloads; a flood of **`500`s on serialized input** is a giveaway.
 - Fix it by **not deserializing untrusted data**, using **safe formats**, **class allowlisting**, and patching.
 - Verify CVE attributions: the course's Struts2 (CVE-2017-5638) and MS15-004 examples are **not** deserialization bugs — the real references are **Commons Collections / ysoserial** (Java) and **BinaryFormatter / ysoserial.net** (.NET).
