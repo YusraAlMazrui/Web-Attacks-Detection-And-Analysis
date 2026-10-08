@@ -19,9 +19,9 @@ This section covers **Spring4Shell (CVE-2022-22965)**, a critical **remote code 
 
 ## 1. What is Spring4Shell?
 
-- **Spring4Shell** (disclosed **March 29–30, 2022**, **CVE-2022-22965**, **CVSS 9.8**) is a critical RCE in **Spring Framework Core** — the widely used Java web framework.
+- **Spring4Shell** (disclosed **March 29–30, 2022**, **CVE-2022-22965**, **CVSS 9.8**) is a critical RCE in **Spring Framework Core**, the widely used Java web framework.
 - It was **initially confused** with **CVE-2022-22963** (a SpEL injection in **Spring Cloud Function**). They're separate: Spring4Shell is in **Spring Core** (`spring-webmvc` / `spring-webflux`).
-- A specially crafted HTTP request bypasses built-in protections and leads to **remote code execution** — with active exploitation and public PoCs seen in the wild.
+- A specially crafted HTTP request bypasses built-in protections and leads to **remote code execution**, with active exploitation and public PoCs seen in the wild.
 
 **Impact:** arbitrary command execution with the application's privileges → unauthorized access, data breaches, full system compromise.
 
@@ -29,7 +29,7 @@ This section covers **Spring4Shell (CVE-2022-22965)**, a critical **remote code 
 
 ## 2. How the attack works
 
-Spring4Shell abuses Spring's **data binding** — the feature that maps request parameters onto object properties. On a vulnerable setup, an attacker can reach **`class.module.classLoader…`** through that binding and **reconfigure Tomcat's logging valve (AccessLogValve)** to write a file of their choice.
+Spring4Shell abuses Spring's **data binding**, the feature that maps request parameters onto object properties. On a vulnerable setup, an attacker can reach **`class.module.classLoader…`** through that binding and **reconfigure Tomcat's logging valve (AccessLogValve)** to write a file of their choice.
 
 **Attack flow**
 1. The attacker sends a **POST** with parameters that set `class.module.classLoader.resources.context.parent.pipeline.first.*` properties.
@@ -45,11 +45,11 @@ Per the Spring advisory, an app is exposed to Spring4Shell only when **all** of 
 
 1. **JDK 9 or higher.**
 2. **Apache Tomcat** as the servlet container.
-3. **Traditional WAR packaging** (not a Spring Boot executable JAR — Boot apps are generally *not* vulnerable).
+3. **Traditional WAR packaging** (not a Spring Boot executable JAR, Boot apps are generally *not* vulnerable).
 4. A dependency on **`spring-webmvc`** or **`spring-webflux`**.
 5. A vulnerable **Spring Framework version**: **5.3.0–5.3.17**, **5.2.0–5.2.19**, and older unsupported releases.
 
-> These are the exact conditions my **[Log4Shell notes (Section 5)](05-detecting-log4shell-attack.md)** flagged as belonging to Spring4Shell rather than Log4j — this is where they actually apply.
+> These are the exact conditions my **[Log4Shell notes (Section 5)](05-detecting-log4shell-attack.md)** flagged as belonging to Spring4Shell rather than Log4j, this is where they actually apply.
 
 ---
 
@@ -80,7 +80,7 @@ grep -iE 'class\.module\.classLoader\.resources|getRuntime\(\)\.exec' access.log
 ### Also watch for
 - Unusual URLs / parameters, encoded keywords, odd URL structures.
 - **Abnormal request behaviour**: repeated POSTs to one endpoint, oversized payloads, bursts from one IP.
-- A follow-up **request to a newly created `.jsp`** (e.g. `tomcatwar.jsp`) — if that returns **`200`**, the web shell likely landed.
+- A follow-up **request to a newly created `.jsp`** (e.g. `tomcatwar.jsp`) if that returns **`200`**, the web shell likely landed.
 
 > A log match is the **attempt**. Confirm success by checking whether the dropped JSP exists / responds and whether commands ran.
 
@@ -92,8 +92,8 @@ grep -iE 'class\.module\.classLoader\.resources|getRuntime\(\)\.exec' access.log
   - Maven: `<spring-framework.version>5.3.18</spring-framework.version>`
   - Gradle: `ext['spring-framework.version'] = '5.3.18'`
 - If you can't upgrade immediately, apply **Spring's official workaround** (restricting disallowed data-binding fields).
-- **Secure input handling** — validate/sanitize and bind only expected fields.
-- **Secure configuration** — disable unneeded features/modules.
+- **Secure input handling**, validate/sanitize and bind only expected fields.
+- **Secure configuration**, disable unneeded features/modules.
 - **Security auditing, logging/monitoring, IDS**, and regular **penetration testing**.
 
 ---
@@ -124,16 +124,16 @@ grep -iE 'class\.module\.classLoader\.resources|getRuntime\(\)\.exec' access.log
 - The `python-requests/2.25.1` user agent confirms **automated/scripted** exploitation, not a browser.
 
 **Observations**
-- The payload set the Tomcat pipeline's **`suffix=.jsp`**, **`prefix=tomcatwar`**, **`directory=webapps/ROOT`** and a malicious **`pattern=`** — the textbook Spring4Shell web-shell drop.
+- The payload set the Tomcat pipeline's **`suffix=.jsp`**, **`prefix=tomcatwar`**, **`directory=webapps/ROOT`** and a malicious **`pattern=`**, the textbook Spring4Shell web-shell drop.
 - Watch the follow-up requests: a hit on **`/tomcatwar.jsp`** returning **`200`** indicates the web shell was successfully written and reachable (vs the earlier `/spring-form/tomcatwar.jsp` 404 before it was placed).
 
 ---
 
 ## Key takeaways
 
-- Spring4Shell (**CVE-2022-22965**) is a **data-binding RCE** in Spring Core that abuses **`class.module.classLoader…`** to make **Tomcat write a JSP web shell** — it is *not* the same as the Spring Cloud bug **CVE-2022-22963**.
-- Only a specific setup is vulnerable: **JDK 9+, Tomcat, WAR packaging, `spring-webmvc`/`webflux`, Spring 5.3.0–5.3.17 / 5.2.0–5.2.19** — the very conditions my Log4Shell notes flagged as actually being Spring4Shell.
-- The detection signature is **`class.module.classLoader.resources`** in **POST bodies** — which means you must **enable request-body logging** to catch it.
+- Spring4Shell (**CVE-2022-22965**) is a **data-binding RCE** in Spring Core that abuses **`class.module.classLoader…`** to make **Tomcat write a JSP web shell**, it is *not* the same as the Spring Cloud bug **CVE-2022-22963**.
+- Only a specific setup is vulnerable: **JDK 9+, Tomcat, WAR packaging, `spring-webmvc`/`webflux`, Spring 5.3.0–5.3.17 / 5.2.0–5.2.19**, the very conditions my Log4Shell notes flagged as actually being Spring4Shell.
+- The detection signature is **`class.module.classLoader.resources`** in **POST bodies**, which means you must **enable request-body logging** to catch it.
 - Confirm success by checking for a **newly dropped `.jsp`** returning `200`.
 - The fix is **upgrading to Spring 5.3.18 / 5.2.20**.
 
