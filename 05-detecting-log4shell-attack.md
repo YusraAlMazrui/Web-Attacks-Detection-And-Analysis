@@ -161,6 +161,9 @@ For Log4Shell:
 ![Images/05-Lab-Identify-DNS-Server.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/b025cc21a7765fce6a5cebf54a3aaba0370da9f6/Images/05-Lab-Identify-DNS-Server.png)
 
 - Identify the **environment variable** used in one of the payloads.
+
+![Images/05-Lab-Identify-Environment-Variable.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/0a384a558f2207748c88d9888936bb90e5cd6afe/Images/05-Lab-Identify-Environment-Variable.png)
+
 - Identify which **HTTP header** was attacked.
 
 **How I approached it**
@@ -173,17 +176,6 @@ For Log4Shell:
 - Many payloads were **obfuscated**, using nested `${lower:...}`, `${::-j}`-style lookups and URL-encoding, so a plain `jndi` search alone would miss some. This is why the broad grep in section 4 is useful.
 - The **same domain** appeared repeatedly with a different random-looking subdomain in each request, consistent with callback tracking.
 - Many of these requests returned **499** (an nginx status meaning the client closed the connection before the response), which fits automated scanning tools that don't wait for a response.
-
-**Screenshots**
-
-_Add your lab screenshots here: save them in the `images/` folder, then replace the example lines below._
-
-<!--
-![Lab files and access.log](images/log4shell-lab-01-files.png)
-![Searching the log for jndi](images/log4shell-lab-02-jndi-search.png)
-![Payload showing the callback domain](images/log4shell-lab-03-dns-domain.png)
-![Payload using an environment variable lookup](images/log4shell-lab-04-env-variable.png)
--->
 
 ---
 
