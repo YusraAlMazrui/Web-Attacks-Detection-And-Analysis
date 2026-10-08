@@ -114,10 +114,6 @@ Deserializing tampered data often throws tell-tale exceptions — **`ClassNotFou
 | **.NET BinaryFormatter** | base64 starting `AAEAAAD/////…` → RCE on deserialize |
 | **Ruby YAML** | `--- !ruby/object:OpenStruct …` → RCE via crafted object |
 
-> **Corrections to the course's real-world examples** — both named CVEs are mislabeled:
-> - **CVE-2017-5638 (Apache Struts2)** is **OGNL code injection via the `Content-Type` header** (the Equifax RCE), **not** a deserialization flaw. The classic *Java deserialization* case is the **Apache Commons Collections gadget chain** (FoxGlove Security, 2015) that hit WebLogic, JBoss, Jenkins and WebSphere — weaponized by the **ysoserial** tool.
-> - **MS15-004 (CVE-2015-0016)** is a **TS WebProxy directory-traversal privilege escalation** (an IE sandbox escape), **not** a .NET deserialization issue. The well-known *.NET deserialization* work is **BinaryFormatter / `TypeNameHandling`** abuse (Muñoz & Mirosh, *"Friday the 13th JSON Attacks,"* 2017), weaponized by **ysoserial.net**.
-
 ---
 
 ## 7. Lab: Insecure Deserialization log analysis
@@ -144,7 +140,7 @@ Deserializing tampered data often throws tell-tale exceptions — **`ClassNotFou
 
 - Which **request parameter** is most commonly targeted?
 
-![Images/10-Lab-Parameter.png](Images/10-Lab-Parameter.png)
+**Data**
 
 **Answers**
 
