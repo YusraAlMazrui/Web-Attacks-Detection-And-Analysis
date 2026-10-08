@@ -4,7 +4,7 @@
 
 ## Overview
 
-This section covers **JSON Web Tokens (JWTs)** and how they're attacked — in particular **`kid` (Key ID) injection**, which can lead to authentication bypass, SQL injection, remote code execution and directory traversal. It focuses on how JWTs are structured, why the `kid` parameter is a weak point, what malicious tokens look like, and how a SOC detects and responds to these attacks.
+This section covers **JSON Web Tokens (JWTs)** and how they're attacked, in particular **`kid` (Key ID) injection**, which can lead to authentication bypass, SQL injection, remote code execution and directory traversal. It focuses on how JWTs are structured, why the `kid` parameter is a weak point, what malicious tokens look like, and how a SOC detects and responds to these attacks.
 
 | # | Topic |
 |---|-------|
@@ -21,24 +21,24 @@ This section covers **JSON Web Tokens (JWTs)** and how they're attacked — in p
 
 Two related but distinct ideas underpin everything here:
 
-- **Authentication** = *verifying who you are* (checking credentials — password, certificate, biometric, MFA). Success establishes a trusted identity.
+- **Authentication** = *verifying who you are* (checking credentials (password), certificate, biometric, MFA). Success establishes a trusted identity.
 - **Authorization** = *deciding what you're allowed to do* once authenticated (roles, permissions, least privilege).
 
-JWTs are used for **both** — the token proves identity and carries the claims that drive authorization decisions. That's exactly why forging or tampering with a JWT is so damaging: break the token and you can impersonate a user **and** inherit their privileges.
+JWTs are used for **both**: the token proves identity and carries the claims that drive authorization decisions. That's exactly why forging or tampering with a JWT is so damaging: break the token and you can impersonate a user **and** inherit their privileges.
 
 ---
 
 ## 2. JSON Web Tokens (JWT)
 
-A **JWT** (RFC 7519) is a compact, self-contained way to transmit claims as a signed JSON object. It's **stateless** — the server doesn't need to store a session; it just verifies the token's signature.
+A **JWT** (RFC 7519) is a compact, self-contained way to transmit claims as a signed JSON object. It's **stateless**, the server doesn't need to store a session; it just verifies the token's signature.
 
 A JWT has **three Base64URL-encoded parts joined by dots**: `header.payload.signature`.
 
 | Part | Contains |
 |---|---|
 | **Header** | Token type and the signing algorithm (`alg`), e.g. `HS256`, `RS256` |
-| **Payload** | The claims — e.g. `sub` (subject/user ID), `name`, `iat` (issued-at), plus custom claims |
-| **Signature** | Header + payload signed with a secret key (HMAC) or private key (RSA/ECDSA) — proves integrity and authenticity |
+| **Payload** | The claims, e.g. `sub` (subject/user ID), `name`, `iat` (issued-at), plus custom claims |
+| **Signature** | Header + payload signed with a secret key (HMAC) or private key (RSA/ECDSA), proves integrity and authenticity |
 
 **Example token:**
 ```
@@ -47,7 +47,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4
 Decoded header → `{"alg":"HS256","typ":"JWT"}`
 Decoded payload → `{"sub":"1234567890","name":"John Doe","iat":1516239022}`
 
-The recipient re-computes the signature with the key and compares — if it matches, the token wasn't tampered with. **The whole security model rests on the server trusting the right key.** That's what `kid` attacks target.
+The recipient re-computes the signature with the key and compares, if it matches, the token wasn't tampered with. **The whole security model rests on the server trusting the right key.** That's what `kid` attacks target.
 
 > HS256 (symmetric, one shared secret) is used above for simplicity. JWTs can also use asymmetric algorithms (RS256, ES256) where a **private** key signs and a **public** key verifies.
 
@@ -121,7 +121,7 @@ The same traversal can be aimed at sensitive files to **read** them:
 The course lays out a SOC workflow: **threat-intel monitoring → log monitoring/analysis → security-event detection (SIEM) → real-time monitoring (WAF, IDS/IPS) → incident response → post-incident review.** The practical core for an analyst is spotting **malicious `kid` values** in JWTs.
 
 ### What a malicious `kid` looks like
-Decode the JWT header (the first `.`-separated segment) and inspect `kid` for:
+Decode the JWT header (the first `.`separated segment) and inspect `kid` for:
 - **SQL injection**: `UNION SELECT`, `' OR 1=1 --`, stray quotes.
 - **Command injection**: `|`, `;`, `&`, `$()`, backticks, paths to binaries (`/usr/bin/...`).
 - **Directory traversal**: `../`, `/dev/null`, `/etc/passwd`, absolute paths to static files.
