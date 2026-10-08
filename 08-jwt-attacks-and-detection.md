@@ -171,4 +171,4 @@ Understanding JWT structure and the auth/authz model, decoding Base64URL tokens,
 
 ---
 
-*Previous: [Section 7: F5 BIG-IP iControl REST RCE Detection](07-detecting-f5-icontrol-rest-rce.md) | Back to [README](README.md)*
+*Previous: [Section 7: F5 BIG-IP iControl REST RCE Detection](07-detecting-f5-icontrol-rest-rce.md) | Next: [Section 9: SAML Vulnerabilities and Detection](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/bac9d053b210b708c2885940bd3268d2dd26a405/09-saml-vulnerabilities-and-detection.md)*
