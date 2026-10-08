@@ -6,16 +6,16 @@
 
 This section is about **post-attack analysis**: working out what happened on a web server after (or during) an attack. It covers how to read web server logs, how common attacks on servers, applications and programming languages show up in evidence, how to find web shells, and a full walkthrough of a compromised WordPress server.
 
-## Contents
-
-1. Introduction to Hacked Web Server Analysis
-2. Log Analysis on Web Servers
-3. Attacks on Web Servers
-4. Attacks Against Web Applications
-5. Vulnerabilities on Servers
-6. Vulnerabilities in Programming Language
-7. Discovering the Web Shell
-8. Hacked Web Server Analysis Example
+| # | Topic |
+|---|-------|
+| 1 | Introduction to Hacked Web Server Analysis | 
+| 2 | Log Analysis on Web Servers | 
+| 3 | Attacks on Web Servers | 
+| 4 | Attacks Against Web Applications | 
+| 5 | Vulnerabilities on Servers |
+| 6 | Vulnerabilities in Programming Language |
+| 7 | Discovering the Web Shell|
+| 8 | Hacked Web Server Analysis Example |
 
 ---
 
