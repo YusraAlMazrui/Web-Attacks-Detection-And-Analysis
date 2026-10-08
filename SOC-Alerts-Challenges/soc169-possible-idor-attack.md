@@ -136,4 +136,4 @@ Alert triage, IP reputation checks, SIEM log filtering by source IP, IDOR patter
 
 ---
 
-*Related: [SOC170 - Possible LFI Attack](soc170-possible-lfi-attack.md) | [Back to README](../README.md)*
+*Related: [SOC170 - Possible LFI Attack](soc170-possible-LFI-attack.md) | [Back to README](../README.md)*
