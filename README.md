@@ -16,6 +16,7 @@ My notes and lab write-ups from the **Web Attack Detection and Analysis** course
 | Alert | Type | Verdict |
 |-------|------|---------|
 | [SOC170 - Passwd Found in Requested URL](SOC-Alerts-Challenges/soc170-possible-LFI-attack.md) | Web Attack (LFI) | True Positive |
+| [SOC169 - Possible IDOR Attack](SOC-Alerts-Challenges/soc169-possible-idor-attack.md) | Web Attack (IDOR) | True Positive |
 
 ## Approach used across the labs
 
