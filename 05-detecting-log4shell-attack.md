@@ -6,12 +6,12 @@
 
 This section covers **Log4Shell (CVE-2021-44228)**, a critical vulnerability in the Apache Log4j logging library. It focuses on how the attack works, how to recognize it in web server logs (including obfuscated payloads), how to write detection rules, and how to mitigate it.
 
-| Topic | Lab |
-|---|---|
-| What Log4Shell is and how it works | Log4Shell log analysis (nginx `access.log`) |
-| Payloads, probes and information leakage | |
-| Detection rules, grep and regex | |
-| Mitigation | |
+| # | Topic | 
+|---|-------|
+| 1 | What Log4Shell is and how it works | 
+| 2 | Payloads, probes and information leakage |
+| 3 | Detection rules, grep and regex | 
+| 4 | Mitigation | 
 
 ---
 
