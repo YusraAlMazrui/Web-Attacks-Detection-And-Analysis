@@ -172,4 +172,4 @@ Understanding the SAML SSO model (IdP/SP/User), recognizing XML-based attacks (X
 
 ---
 
-*Previous: [Section 8: JWT Attacks and Detection](08-jwt-attacks-and-detection.md) | Next: [Section 10: Detecting Insecure Deserialization]([README.md](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/c401443687e86783180257937a30d66b306f6ccc/10-detecting-insecure-deserialization.md))*
+*Previous: [Section 8: JWT Attacks and Detection](08-jwt-attacks-and-detection.md) | Next: [Section 10: Detecting Insecure Deserialization](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/c401443687e86783180257937a30d66b306f6ccc/10-detecting-insecure-deserialization.md)*
