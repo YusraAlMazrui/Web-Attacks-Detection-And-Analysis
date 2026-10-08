@@ -1,6 +1,6 @@
 # SOC Alert: SOC170 - Passwd Found in Requested URL - Possible LFI Attack (Event ID 120)
 
-> Sub-file of [Section 1: Detecting Web Attacks](../01-detecting-web-attacks.md). Platform: **LetsDefend** (practice alert, SOC analyst role).
+> Platform: **LetsDefend** (practice alert, SOC analyst role).
 
 ## Summary
 
