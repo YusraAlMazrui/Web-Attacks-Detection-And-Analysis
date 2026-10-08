@@ -19,12 +19,12 @@ This section covers **SAML (Security Assertion Markup Language)**, the XML-based
 
 ## 1. What is SAML?
 
-**SAML** is an **XML-based open standard** for exchanging **authentication and authorization** data between parties. It's what lets a user log in once and reach many applications — **SSO**.
+**SAML** is an **XML-based open standard** for exchanging **authentication and authorization** data between parties. It's what lets a user log in once and reach many applications, **SSO**.
 
 Three entities are involved:
-- **Identity Provider (IdP)** — authenticates the user and issues a signed **SAML assertion** about them.
-- **Service Provider (SP)** — the application the user wants; it trusts assertions from the IdP.
-- **User** (their browser) — carries messages between SP and IdP.
+- **Identity Provider (IdP)**: authenticates the user and issues a signed **SAML assertion** about them.
+- **Service Provider (SP)**: the application the user wants; it trusts assertions from the IdP.
+- **User** (their browser): carries messages between SP and IdP.
 
 **The workflow (SP-initiated SSO):**
 1. The user requests a protected resource at the **SP**.
@@ -33,7 +33,7 @@ Three entities are involved:
 4. The assertion goes to the user's **browser**, which **forwards it to the SP**.
 5. The **SP validates** the assertion's **signature and integrity**. If valid, the user is in.
 
-**Why this is a juicy target:** the assertion is what proves "I am this user with these privileges." A **SAML Response is an XML document, base64-encoded** (and deflated on the redirect binding). If an attacker can **tamper with it and still pass validation**, they can impersonate anyone or escalate privileges — without a password.
+**Why this is a juicy target:** the assertion is what proves "I am this user with these privileges." A **SAML Response is an XML document, base64-encoded** (and deflated on the redirect binding). If an attacker can **tamper with it and still pass validation**, they can impersonate anyone or escalate privileges, without a password.
 
 ---
 
@@ -86,10 +86,10 @@ Tampering with or forging the IdP's response to **change user attributes, escala
 **Mitigation:** validate and sanitize input, enforce strict attribute mapping, add integrity checks.
 
 ### SAML SSRF
-Manipulating a SAML message so the **SP makes requests to internal/external servers** — bypassing firewalls, reaching internal resources, recon.
+Manipulating a SAML message so the **SP makes requests to internal/external servers**, bypassing firewalls, reaching internal resources, recon.
 **Mitigation:** input validation/filtering of URLs and IPs, whitelist what the SP may contact, patch.
 
-### XML Signature Wrapping (XSW) — the big one
+### XML Signature Wrapping (XSW), the big one
 XSW targets the **gap between what gets signature-validated and what the application actually reads**. The attacker **restructures the XML** so the original signed element still validates, but injects a **forged assertion** that the application logic consumes instead. Result: **signature passes, content is attacker-controlled** → impersonation, privilege escalation, assertion tampering.
 **Mitigation:** strict XML signature validation (validate the exact element that's used), hardened SAML libraries with built-in XSW protection, secure implementations.
 
@@ -99,11 +99,11 @@ XSW targets the **gap between what gets signature-validated and what the applica
 
 Core SOC strategies from the course:
 - **Monitor SAML assertion traffic** between IdP and SP for abnormal patterns, volume spikes or odd message flows.
-- **Analyze assertion metadata** — signing certificates, entity IDs, expiration — and flag expired/tampered certs, unexpected entity-ID changes, inconsistent metadata.
-- **Track auth/authz events** — log successful and failed SAML transactions; watch for failed-attempt bursts and unexpected user behavior.
-- **Integrate into SIEM** — centralize SAML logs and use correlation rules to alert.
+- **Analyze assertion metadata**, signing certificates, entity IDs, expiration, and flag expired/tampered certs, unexpected entity-ID changes, inconsistent metadata.
+- **Track auth/authz events**, log successful and failed SAML transactions; watch for failed-attempt bursts and unexpected user behavior.
+- **Integrate into SIEM**, centralize SAML logs and use correlation rules to alert.
 
-> **Practical note:** SAML messages are **base64-encoded** (and often deflated). To apply the content regexes below, you usually have to **base64-decode (and inflate) the `SAMLResponse` / `SAMLRequest`** first — the raw parameter won't match on `<!ENTITY` etc. until it's decoded.
+> **Practical note:** SAML messages are **base64-encoded** (and often deflated). To apply the content regexes below, you usually have to **base64-decode (and inflate) the `SAMLResponse` / `SAMLRequest`** first, the raw parameter won't match on `<!ENTITY` etc. until it's decoded.
 
 ### Regex detection patterns (from the course)
 | Attack | Regex | Looks for |
@@ -113,7 +113,7 @@ Core SOC strategies from the course:
 | **XML entity injection (XXE)** | `<!ENTITY\s+%[^>]+>` | an `<!ENTITY` parameter-entity declaration inside a SAML message |
 | **Signature wrapping (XSW)** | `<ds:Signature[^>]+>.*(<[^/].*>\s*)+.*<\/ds:Signature>` | unexpected nested elements between `<ds:Signature>` and `</ds:Signature>` |
 
-**Example — XXE in an incoming message:**
+**Example: XXE in an incoming message:**
 ```xml
 <AuthnRequest>
   <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
@@ -131,7 +131,7 @@ The pattern `<!ENTITY\s+%[^>]+>` matches the `<!ENTITY % xxe SYSTEM ...>` declar
 
 **For developers:**
 - Use **secure, up-to-date XML parsers and libraries** (protection against XXE and XSW).
-- **Strict XML signature validation** — verify the exact signed element is the one used.
+- **Strict XML signature validation**, verify the exact signed element is the one used.
 - **HTTPS** for all SAML transport.
 - Secure **session management** (timeouts, safe token handling, key rotation).
 - **Validate and sanitize all input** (guards XXE, XSLT injection).
@@ -150,19 +150,19 @@ The pattern `<!ENTITY\s+%[^>]+>` matches the `<!ENTITY % xxe SYSTEM ...>` declar
 
 ## 5. Real-world case studies
 
-- **OneLogin breach (2017)** — an attacker obtained OneLogin's **AWS keys** (attack began 31 May 2017) and accessed database tables and **the ability to decrypt data, including SAML-related secrets**. Affected customers had to **reissue SAML SSO certificates** and rotate tokens. Lesson: protect the keys and secrets behind the SAML infrastructure, not just the assertions.
+- **OneLogin breach (2017)**: an attacker obtained OneLogin's **AWS keys** (attack began 31 May 2017) and accessed database tables and **the ability to decrypt data, including SAML-related secrets**. Affected customers had to **reissue SAML SSO certificates** and rotate tokens. Lesson: protect the keys and secrets behind the SAML infrastructure, not just the assertions.
 
-- **SAML Response injection (illustrative)** — a scenario where an attacker tampers with the SAML response to **escalate privileges** and reach sensitive resources. Lesson: validate/sanitize responses, enforce strict attribute mapping, add integrity checks.
+- **SAML Response injection (illustrative)**: a scenario where an attacker tampers with the SAML response to **escalate privileges** and reach sensitive resources. Lesson: validate/sanitize responses, enforce strict attribute mapping, add integrity checks.
 
-- **SAML SSRF (illustrative)** — a scenario where a crafted SAML message makes the SP request **internal servers**, bypassing network controls. Lesson: input validation and whitelist-based egress control.
+- **SAML SSRF (illustrative)**: a scenario where a crafted SAML message makes the SP request **internal servers**, bypassing network controls. Lesson: input validation and whitelist-based egress control.
 
 ---
 
 ## Key takeaways
 
 - SAML is **signed XML assertions** exchanged between **IdP → browser → SP** for SSO; its security hinges on the SP **validating the exact element it then trusts**.
-- The headline attack is **XML Signature Wrapping (XSW)** — forge the content while keeping a valid signature. SAML is also exposed to **XXE, XSLT injection, response injection and SSRF** because it's XML.
-- Detection = **decode the base64 SAML message first**, then inspect it for `<!ENTITY` (XXE), nested elements inside `<ds:Signature>` (XSW), duplicate `ResponseID` (replay) and attribute/NameID mismatches — and correlate with real IdP login events.
+- The headline attack is **XML Signature Wrapping (XSW)**, forge the content while keeping a valid signature. SAML is also exposed to **XXE, XSLT injection, response injection and SSRF** because it's XML.
+- Detection = **decode the base64 SAML message first**, then inspect it for `<!ENTITY` (XXE), nested elements inside `<ds:Signature>` (XSW), duplicate `ResponseID` (replay) and attribute/NameID mismatches, and correlate with real IdP login events.
 - Regex helps but is **fragile**; pair it with metadata analysis, anomaly detection and threat intel.
 - Biggest lessons from the real world: **protect the IdP signing keys** (OneLogin breach; Golden SAML) and use **hardened, patched SAML libraries** (CVE-2017-11427/11428).
 
