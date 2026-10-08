@@ -106,8 +106,6 @@ https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/cdc92bc
   - `find /opt/jboss-6.0.0.Final/ -type f -name "jbossass.jsp"`
 - **Protection:** upgrade to JBoss EAP 7; don't run the software as a privileged user.
 
-> **Note:** the course text writes `jbossass.jps` in one place; the actual file is `.jsp` (as in the `find` command). Likewise `/examples/jps/` in the Tomcat example should read `/examples/jsp/`.
-
 ### Lab 2: Apache2 log analysis (multiple attackers)
 
 **Environment:** `/var/log/apache2/access.log.1` on a Linux VM.
@@ -154,8 +152,6 @@ A demo showed a `UNION SELECT null, version()` payload returning the database ve
 ```
 cat access.log | grep -E "%27|--|union|select|from|or|@|version|char|varchar|exec"
 ```
-
-> **Tip:** the course command is missing its closing quote (fixed above). `from` and `or` are very common substrings, so expect **false positives**; add `-i` for case-insensitive matching and narrow the results afterwards.
 
 **Protection:** prepared statements, validating and filtering input, restricting user privileges.
 
