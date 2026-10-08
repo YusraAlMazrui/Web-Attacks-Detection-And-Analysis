@@ -10,6 +10,7 @@ My notes and lab write-ups from the **Web Attack Detection and Analysis** course
 | [2. Detecting Web Attacks - 2](02-detecting-web-attacks-2.md) | Open Redirection, Directory Traversal, Brute Force, XXE | 
 | [3. Detecting Advanced Web Attacks](03-detecting-advanced-web-attacks.md) | SSTI, Expression Language Injection, HTTP Header Injection, SSRF, NoSQL Injection | 
 | [4. Hacked Web Server Analysis](04-hacked-web-server-analysis.md) | Log analysis, Web Server and Application Attacks, Web Shells, WordPress Compromise |
+| [5. Detecting Log4Shell Attack](05-detecting-log4shell-attack.md) | Log4Shell (CVE-2021-44228), Payload Obfuscation, Detection Rules, Mitigation |
 
 ## SOC Alerts
 
