@@ -170,7 +170,7 @@ Deserializing tampered data often throws tell-tale exceptions, **`ClassNotFoundE
 - Each language leaves a **signature**, PHP `O:`/`a:`, Java `AC ED 00 05` / `rO0`, Python streams ending `.`, .NET `AAEAAAD`, Ruby `!ruby/object:` / `BAh` which is what detection grep/SIEM rules key on.
 - Detection also leans on **deserialization exceptions** (`ClassNotFoundException`, `InvalidClassException`, `ClassCastException`) and **anomalies** like oversized payloads; a flood of **`500`s on serialized input** is a giveaway.
 - Fix it by **not deserializing untrusted data**, using **safe formats**, **class allowlisting**, and patching.
-- Verify CVE attributions: the course's Struts2 (CVE-2017-5638) and MS15-004 examples are **not** deserialization bugs — the real references are **Commons Collections / ysoserial** (Java) and **BinaryFormatter / ysoserial.net** (.NET).
+- Verify CVE attributions: the course's Struts2 (CVE-2017-5638) and MS15-004 examples are **not** deserialization bugs, the real references are **Commons Collections / ysoserial** (Java) and **BinaryFormatter / ysoserial.net** (.NET).
 
 ## Skills practised
 
