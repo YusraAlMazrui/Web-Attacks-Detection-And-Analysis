@@ -35,21 +35,31 @@ The alert details already give the key facts:
 
 I created a case (ticket) for **SOC169 - Possible IDOR Attack Detected** and started the playbook. A case lets the SOC track and prioritize the incident, and a playbook keeps the response consistent from analyst to analyst.
 
+![Images/SOC169-Create-Ticket.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/0b1a96947e9ac9607843453f5c44dc581db439fa/Images/SOC169-Create-Ticket.png)
+
 ## 3. Is the traffic from inside or outside the network?
 
 The source IP is **external** (outside the company network), so the direction of traffic is **Internet to Company Network**.
+
+![Images/SOC169-SRC-Endpoint-NOTFOUND.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/0b1a96947e9ac9607843453f5c44dc581db439fa/Images/SOC169-SRC-Endpoint-NOTFOUND.png)
 
 ## 4. Check the IP reputation
 
 I checked `134.209.118.137` on **VirusTotal** and **AbuseIPDB**. Neither flagged it as malicious, and it belongs to **DigitalOcean**, a cloud hosting provider. A clean reputation doesn't clear it, because cloud IPs are easy to rent and rotate. The traffic itself had to be judged.
 
-<!--
-![IP reputation check](../Images/SOC169-IP-Reputation.png)
--->
+- **VirusTotal**
+
+![Images/SOC169-VirusTotal.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/0b1a96947e9ac9607843453f5c44dc581db439fa/Images/SOC169-VirusTotal.png)
+
+- **AbuseIPDB**
+
+![Images/SOC169-AbuseIPDB.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/0b1a96947e9ac9607843453f5c44dc581db439fa/Images/SOC169-AbuseIPDB.png)
 
 ## 5. Examine the traffic
 
 In **Log Management** I filtered by the **source IP**. The query returned **5 events**.
+
+![Images/SOC169-Log-Details.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/0b1a96947e9ac9607843453f5c44dc581db439fa/Images/SOC169-Log-Details.png)
 
 Looking at the requests:
 
@@ -70,11 +80,6 @@ The raw log of a request shows:
 
 Note that this raw log **includes the POST parameters**. Plain web server access logs usually don't (see [Section 4](../04-hacked-web-server-analysis/README.md)), so this is a useful source for judging POST-based attacks.
 
-<!--
-![Log Management filtered by source IP](../Images/SOC169-Log-Management.png)
-![Raw log of the request](../Images/SOC169-Raw-Log.png)
--->
-
 ## 6. Malicious or not?
 
 **Malicious.** A normal user requests their own record. A single external IP sending consecutive requests with changing `user_id` values is **enumerating other users' data**, which no legitimate user needs to do.
@@ -87,6 +92,8 @@ Note that this raw log **includes the POST parameters**. Plain web server access
 
 I checked whether this could be an authorized test, including the **Email Security** tab. There was **no information** about planned work, so it was **not a planned test**.
 
+![SOC169-Not-Planned-Attack.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/0b1a96947e9ac9607843453f5c44dc581db439fa/Images/SOC169-Not-Planned-Attack.png)
+
 ## 9. Was the attack successful?
 
 **Yes (likely).** The requests returned **HTTP 200** and the **response size differed per `user_id`**, which suggests different users' data was returned.
@@ -98,9 +105,7 @@ I checked whether this could be an authorized test, including the **Email Securi
 - Because the attack may have succeeded, I **contained the device** (WebServer1005) to prevent further damage.
 - The playbook says to **escalate to Tier 2** when an attack succeeds, so I did.
 
-<!--
-![Device containment](../Images/SOC169-Containment.png)
--->
+![Images/SOC169-Device-Contained.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/0b1a96947e9ac9607843453f5c44dc581db439fa/Images/SOC169-Device-Contained.png)
 
 ## 11. Analyst note
 
