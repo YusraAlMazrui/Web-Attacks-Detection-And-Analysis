@@ -6,6 +6,8 @@ My notes and lab write-ups from the Web Attack Detection and Analysis course. Th
 
 ![Web Attack Detection and Analysis Certificate](Images/certificate.png)
 
+[Verify this certificate](https://app.letsdefend.io/certificate/show/9e249364-1656-4f39-ae1f-0e65b918e17f)
+
 ## Contents
 
 | Section | Topics |
