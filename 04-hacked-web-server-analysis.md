@@ -307,4 +307,6 @@ Web server log analysis (nginx, Apache2), filtering with `grep` / `zgrep`, times
 
 ---
 
-*Previous: [Section 3: Detecting Advanced Web Attacks](03-detecting-advanced-web-attacks.md) | Back to [README](README.md)*
+*Previous: [Section 3: Detecting Advanced Web Attacks](03-detecting-advanced-web-attacks.md) | Next: [Section 5: Detecting Log4Shell Attack](05-detecting-log4shell-attack.md)*
+
+
