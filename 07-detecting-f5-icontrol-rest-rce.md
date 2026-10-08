@@ -146,11 +146,15 @@ The access log shows the **attempt**. To judge success:
 
 - How many **potential exploit attempts** were made for this CVE?
 
-![Images/07-Lab-Exploit-Attempts.png](Images/07-Lab-Exploit-Attempts.png)
+![Images/07-Lab-Exploit-Attempts.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/dd30edfbc58571a185c3b0534e6db08aee56f780/Images/07-Lab-exploits.png)
 
 - How many requests **may have been successfully exploited**?
 
-![Images/07-Lab-Successful-Exploits.png](Images/07-Lab-Successful-Exploits.png)
+![Images/07-Lab-200successful-exploits.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/dd30edfbc58571a185c3b0534e6db08aee56f780/Images/07-Lab-200successful-exploits.png)
+
+![Images/07-Lab-Successful-Exploits.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/dd30edfbc58571a185c3b0534e6db08aee56f780/Images/07-Lab-200successful-exploits-(2).png)
+
+![Images/07-Lab-400-unsuccessful-exploit.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/dd30edfbc58571a185c3b0534e6db08aee56f780/Images/07-Lab-400-unsuccessful-exploit.png)
 
 **Answers**
 
