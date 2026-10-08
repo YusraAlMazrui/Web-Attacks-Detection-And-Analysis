@@ -7,13 +7,15 @@
 | | |
 |---|---|
 | Alert | SOC170 - Passwd Found in Requested URL - Possible LFI Attack |
-| Severity | High |
+| EventID | 120 |
+| Date / time | 2022-03-01, 10:10 AM (10:10:41 +03:00) |
+| Severity / difficulty | High / Easy |
 | MITRE ATT&CK | T1190 (Exploit Public-Facing Application) |
-| Source IP | 106.55.45.162 (external) |
+| Source IP | 106.55.45.162 (external, Tencent Cloud) |
 | Target | WebServer1006 (172.16.17.13) |
 | Request | `GET https://172.16.17.13/?file=../../../../etc/passwd` |
 | Alert trigger | URL contains `passwd` |
-| Device action | Allowed |
+| Device action | Allowed (not blocked) |
 | **Verdict** | **True positive, attack unsuccessful** |
 
 ---
