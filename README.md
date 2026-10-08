@@ -1,6 +1,6 @@
 # Web Attack Detection and Analysis: Let's Defend Course 
 
-My notes and lab write-ups from the **Web Attack Detection and Analysis** course. The focus is on the defender's side: recognizing web attacks in logs and HTTP requests, judging whether they succeeded, and knowing how to prevent them.
+My notes and lab write-ups from the Web Attack Detection and Analysis course. The focus is on the defender's side: recognizing web attacks in logs and HTTP requests, judging whether they succeeded, and knowing how to prevent them — from classic web vulnerabilities through high-profile CVEs (Log4Shell, Text4Shell, Spring4Shell, F5 BIG-IP) and attacks on authentication (JWT, SAML) and serialization.
 
 ## Certificate
 
@@ -41,7 +41,7 @@ Each lab gave a log file to investigate. The recurring questions were:
 
 ## Skills
 
-Log analysis, attack classification, attacker attribution, timeline reconstruction, payload decoding, regex-based detection, success/failure assessment.
+Log analysis, attack classification, attacker attribution, timeline reconstruction, payload decoding and deobfuscation, regex-based and signature-based detection, SIEM detection logic, CVE analysis, attempt-vs-success assessment, and vulnerability mitigation planning.
 
 ## Note
 
