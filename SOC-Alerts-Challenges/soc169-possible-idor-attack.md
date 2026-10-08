@@ -1,6 +1,6 @@
 # SOC Alert: SOC169 - Possible IDOR Attack Detected (EventID 119)
 
-> Platform: **LetsDefend** (practice alert, SOC analyst role). Related notes: [IDOR in Section 1](../01-detecting-web-attacks/README.md#4-insecure-direct-object-reference-idor) | [Back to README](../README.md)
+> Platform: **LetsDefend** (practice alert, SOC analyst role). Related notes: [IDOR in Section 1](../01-detecting-web-attacks.md#4-insecure-direct-object-reference-idor) | [Back to README](../README.md)
 
 ## Summary
 
