@@ -6,7 +6,17 @@ My notes and lab write-ups from the Web Attack Detection and Analysis course. Th
 
 ![Web Attack Detection and Analysis Certificate](Images/certificate.png)
 
-[Verify this certificate](https://app.letsdefend.io/certificate/show/9e249364-1656-4f39-ae1f-0e65b918e17f)
+<div align="center">
+
+<a href="https://app.letsdefend.io/certificate/show/9e249364-1656-4f39-ae1f-0e65b918e17f">
+  <img src="Images/certificate.png" alt="Web Attack Detection and Analysis Certificate" width="600">
+</a>
+
+<br>
+
+[![Verify](https://img.shields.io/badge/Verify_Credential-LetsDefend-5b6ee1?style=for-the-badge&logo=letsdefend&logoColor=white)](https://app.letsdefend.io/certificate/show/9e249364-1656-4f39-ae1f-0e65b918e17f)
+
+</div>
 
 ## Contents
 
