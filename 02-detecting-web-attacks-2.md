@@ -146,4 +146,4 @@ Log analysis (`access.log`), identifying exploitation start time, attacker attri
 
 ---
 
-*Previous: [Section 1](01-detecting-web-attacks.md) | Next: [Section 3: Detecting Advanced Web Attacks](03-detecting-advanced-web-attacks.md)*
+*Previous: [Section 1: Detecting Web Attacks](01-detecting-web-attacks.md) | Next: [Section 3: Detecting Advanced Web Attacks](03-detecting-advanced-web-attacks.md)*
