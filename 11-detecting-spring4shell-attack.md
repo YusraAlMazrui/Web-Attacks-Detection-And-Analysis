@@ -37,8 +37,6 @@ Spring4Shell abuses Spring's **data binding** — the feature that maps request 
 3. Tomcat writes that **JSP web shell** to disk.
 4. The attacker requests the web shell (e.g. `GET /tomcatwar.jsp?cmd=…`) and **runs commands** via `Runtime.getRuntime().exec(...)`.
 
-> **Precision note:** the course describes this as generic "command injection." More precisely it's a **data-binding / class-loader manipulation** flaw — the request parameters don't run a command directly; they **reconfigure Tomcat to drop a web shell**, which then executes commands. The detection keyword the course gives (`class.module.classLoader.resources`) is exactly right.
-
 ---
 
 ## 3. Check if you're vulnerable
@@ -107,16 +105,10 @@ grep -iE 'class\.module\.classLoader\.resources|getRuntime\(\)\.exec' access.log
 **Tasks**
 
 - What was the **attacker IP address**?
-
-![Images/11-Lab-Attacker-IP.png](Images/11-Lab-Attacker-IP.png)
-
 - What is the **start date and time** of the attack? *(Day/Month/Year:Hour:Minute:Second)*
-
-![Images/11-Lab-Attack-Time.png](Images/11-Lab-Attack-Time.png)
-
 - What is the **attacker's user agent**?
 
-![Images/11-Lab-User-Agent.png](Images/11-Lab-User-Agent.png)
+![Images/11-Lab-Answers.png](Images/11-Lab-Answers.png)
 
 **Answers**
 
