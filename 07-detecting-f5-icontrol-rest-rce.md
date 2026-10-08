@@ -194,4 +194,4 @@ Recognizing an endpoint-specific RCE in web logs, distinguishing exploit attempt
 
 ---
 
-*Previous: [Section 6: Detecting Text4Shell Attack](06-detecting-text4shell-attack.md) | Back to [README](README.md)*
+*Previous: [Section 6: Detecting Text4Shell Attack](06-detecting-text4shell-attack.md) | Next: [Section 8: JWT Attacks and Detection](08-jwt-attacks-and-detection.md)*
