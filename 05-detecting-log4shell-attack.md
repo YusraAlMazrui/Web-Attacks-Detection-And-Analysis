@@ -140,8 +140,6 @@ A `200` response doesn't mean the attack worked or failed, because the lookup ha
 
 ## 5. Mitigation
 
-> The course's patch list (Spring 5.3.18 / 5.2.20, Tomcat 10.0.20 / 9.0.62 / 8.5.78, Spring Boot 2.5.12 / 2.6.6) is for **Spring4Shell**, not Log4Shell.
-
 For Log4Shell:
 - **Upgrade Log4j 2** to a fixed release. 2.15.0 was the first fix, and later releases (2.16.0, 2.17.x and newer) fixed follow-on issues. Always check the **official Apache Log4j security page** for the current recommended version.
 - Find **every** place Log4j is used, including libraries and third-party products that bundle it (use an inventory or an SBOM).
@@ -201,4 +199,4 @@ Recognizing exploit payloads in web logs, decoding obfuscated and URL-encoded st
 
 ---
 
-*Previous: [Section 4: Hacked Web Server Analysis](../04-hacked-web-server-analysis/README.md) | Back to [README](../README.md)*
+*Previous: [Section 4: Hacked Web Server Analysis](04-hacked-web-server-analysis.md) | Back to [README](README.md)*
