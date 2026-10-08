@@ -29,7 +29,7 @@ Before investigating, I read the alert details, since a lot can already be learn
 - The **URL** that triggered the alert
 - Other context: HTTP method (GET), User-Agent, and what the device did with the request (*Allowed*)
 
-The requested URL passes `../../../../etc/passwd` in a `file` parameter. This is the classic LFI pattern covered in [Section 1](README.md#5-local--remote-file-inclusion-lfi--rfi): `../` sequences to climb out of the web directory, then a sensitive system file.
+The requested URL passes `../../../../etc/passwd` in a `file` parameter. This is the classic LFI pattern covered in [Section 1](../01-detecting-web-attacks.md#5-local--remote-file-inclusion-lfi--rfi): `../` sequences to climb out of the web directory, then a sensitive system file.
 
 ![images/SOC170-Case-Details.png](https://github.com/YusraAlMazrui/Web-Attacks-Detection-And-Analysis/blob/67e2eda88382f28c65b2688963492b6de883e6b8/Images/SOC170-Case-Details.png)
 
